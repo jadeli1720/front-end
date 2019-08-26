@@ -9,15 +9,21 @@ import NavBar from './components/Navbar';
 import SleepHistory from './components/SleepHistory';
 import Help from './components/Help';
 import Settings from './components/Settings';
+import LandingPage from './components/LandingPage';
+import Login from './components/login/Login';
+import SignUp from './components/login/SignUp';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <Route exact path='/' component={Home} />
+      <Route exact path='/home' component={Home} />
+      <Route exact path='/' component={LandingPage} />
+      <Route path='/login' component={Login} />
+      <Route path="/signup" component={SignUp} />
       <Route path="/CreateSleepEntry" component={CreateSleepEntry} />
       <Route path='/SleepHistory' component={SleepHistory} />
-      <Route  path='/Help' component={Help} />
+      <Route path='/Help' component={Help} />
       <Route path='Settings.js' component={Settings} />
     </div>
   );
