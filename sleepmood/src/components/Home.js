@@ -68,16 +68,33 @@ const Text = styled.p`
   white-space:nowrap
 `
 
+const WhiteSpace = styled.div`
+  height: 30px; 
+  width: 100%
+`
+
+const CalendarWrap = styled.div`
+  display: flex; 
+  justify-content: center
+`
+
 const Home = () => {
   const [xAxisValues, setXAxisValues] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
     14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]);
+  const [date, setDate] = useState(new Date())
 
   useEffect(() => {
 
   })
 
-  const handleChange = () => {
+  const handleChange = (date) => {
+    console.log([date, new Date('August 13, 2019')])
 
+    setDate(date);
+  }
+
+  const handleCalendarDateClick = () => {
+    console.log('HERE click', date)
   }
 
   return (
@@ -123,12 +140,17 @@ const Home = () => {
       </RowWrap>
       <div>
         <h2 style={{textAlign: 'center'}}>See additional sleep history by week.</h2>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <Calendar 
+        <CalendarWrap>
+          <Calendar style={{borderRadius: '5px'}}
             onChange={handleChange}
-            value={new Date()}
+            value={date}
+            // activeStartDate={date}
+            onClickDay={handleCalendarDateClick}
+            selectRange={true}
+            // returnValue={'start'}
           />
-        </div>
+        </CalendarWrap>
+        <WhiteSpace></WhiteSpace>
       </div>
     </div>
   )
