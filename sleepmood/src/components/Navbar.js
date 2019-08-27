@@ -8,7 +8,7 @@ const NavBar = () => {
     const HeaderWrapper = styled.section`
     display: flex;
     text-align: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #D0C9B4;
     margin: 0 5%;
     justify-content: space-between;
 
