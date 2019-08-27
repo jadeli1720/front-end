@@ -38,12 +38,10 @@ const SignUp = () => {
     border-radius: 5px;
  `
 
- const Div = styled.div`
-  margin-bottom: 15px;
- `
+ 
 
  return (
-    <div>
+    <div className="form">
        <h2 style={{textAlign: "center"}}>Create your sleepmood account.</h2>
        <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
          <fieldset>
@@ -96,7 +94,7 @@ const SignUp = () => {
                onChange={inputChangeHandler}
              />
            </div>
-           <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
+           <Button type="submit" className="pure-button pure-button-primary">Create Account</Button>
          </fieldset>
        </form>
         <p style={{textAlign: "center"}}>Already have an account? <Link to="/login">Sign In.</Link></p>
