@@ -9,12 +9,12 @@ const NavBar = () => {
     display: flex;
     text-align: center;
     border-bottom: 1px solid black;
-    margin: 5% 5%;
-    padding-bottom: 5%;
+    margin: 0 5%;
     justify-content: space-between;
 
     .iconDiv {
       display: flex;
+      margin: 1rem 0rem 2rem 0;
       .cloud {
         font-size: 4rem;
         color: #4A549C;
@@ -29,26 +29,42 @@ const NavBar = () => {
         color: #979ECD;
         font-size: 3rem;
         position: relative;
-        left: -1.2rem;
+        left: -1.6rem;
         top: 1rem;
         transform: rotate(-10deg);
       }
       h1 {
-        /* margin: 0 auto; */
-        /* width: 100%; */
         position: relative;
         top: 1rem;
         left: -3rem;
         z-index: 3;
+        color: white;
       }
     }
 
-  .menuDiv{
-    width: 8rem;
-    justify-content: center;
-  }
+    .menuDiv {
+      display: flex;
+      align-self: center;
+      
+      .menuBox {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        justify-content: center;
+        background-color: #ACB2D8;
+ 
+        .menuIcon {
+          font-size: 2rem;
+          color: #B98479;
+          top: 1.65rem;
+          left: .125rem;
 
-
+          .menuLinks {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
   `;
 
     return (
@@ -58,20 +74,20 @@ const NavBar = () => {
                 <Icon name='moon' className='moon' />
                 <h1>sleepmood</h1>
             </div>
-
-            <Menu compact>
-                <Dropdown text='Menu' className='menuDiv' item simple>
-                    <Dropdown.Menu>
-                        <Dropdown.Item as={NavLink} to='/'>Sleepmood</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/home'>Home</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/SleepHistory'>Sleep History</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/CreateSleepEntry'>Create Sleep Entry</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/Settings'>Settings</Dropdown.Item>
-                        <Dropdown.Item as={NavLink} to='/Help'>Help</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </Menu>
-
+            <div className='menuDiv'>
+                <Menu className='menuBox' compact>
+                    <Dropdown icon='user cirle' className='menuIcon'>
+                        <Dropdown.Menu className='menuLinks'>
+                            <Dropdown.Item as={NavLink} to='/'>Sleepmood</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/home'>Home</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/SleepHistory'>Sleep History</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/CreateSleepEntry'>Create Sleep Entry</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/Settings'>Settings</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/Help'>Help</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Menu>
+            </div>
         </HeaderWrapper>
     )
 }
