@@ -1,21 +1,24 @@
-import React from 'react';
-import {Context } from "./context/context"
+import React, { useState } from 'react';
+import { Context } from "./context/context"
 
 
-const EntryList = ({ entrys, UpdateEntrys}) => {
-    const {sleepentrys} = useState('')
+const EntryList = ({ entrys, UpdateEntrys }) => {
+    const  [ sleepentrys ]  = useState('')
     const [editing, setEditing] = useState(false);
-    const [ToEdit, setEntryToEdit] = useState(initialentry);
+    const [ToEdit, setEntryToEdit] = useState('');
 }
 return (
-    sleepentrys.map (sleepentry => {
-        <div>
-            <h2>{props.sleepentry.date}</h2>
-            <h3>{props.sleepentry.hours}</h3>
+    <div>
+        sleepentrys.map (sleepentry => {
+            <div>
+                <h2>{props.sleepentry.date}</h2>
+                <h3>{props.sleepentry.hours}</h3>
 
-        </div>
-    }
+            </div>
+        }
 
-    ))
+        )
+    </div>
+)
 
-    
+export default EntryList;

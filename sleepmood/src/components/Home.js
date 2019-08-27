@@ -94,6 +94,11 @@ const Home = () => {
         <CircularProgressbar value={recommendedSleep} text={`${recommendedSleep}`} maxValue={12}/>
       </div>
     </div>
+    <div>
+       {/* Calender */}
+        <h2 style={{textAlign: 'center'}}>See additional sleep history by week.</h2>
+        
+      </div>
     </div>
   )
 }

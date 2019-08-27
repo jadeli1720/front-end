@@ -1,38 +1,17 @@
-/* @import url('https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap');
 
 .App {
+  background-color: #191D37 ;
+  background-image: url('https://i.imgur.com/QHWwH4G.png');
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-attachment: fixed;
+  background-size: auto;
+  font-family: 'Roboto', serif;
+  padding:30px 0;
   margin: 0 auto;
   max-width: 500px;
   width: 100%;
   text-align: left;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
