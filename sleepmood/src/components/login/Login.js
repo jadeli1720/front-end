@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 function Login() {
-    const [user, setUser] = useState({ email: '', password: ''})
+    const [user, setUser] = useState({ username: '', password: '' })
 
     const inputChangeHandler = event => {
         setUser({ ...user, [event.target.name] : [event.target.value] })
@@ -9,8 +9,7 @@ function Login() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(user.username);
-        console.log(user.password);
+        console.log(user);
         //This is the post request that allows connection to backend
     //     axios.post(`  `, user)
     //     .then(res => {
@@ -33,9 +32,9 @@ function Login() {
                 <fieldset>
                     <legend>Log In</legend>
                     <input 
-                        type="email" 
-                        name="email"
-                        placeholder="Email"
+                        type="text" 
+                        name="username"
+                        placeholder="Username"
                         onChange={inputChangeHandler}
                         value={user.email}
                     />
