@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import styled from 'styled-components';
 
 function Login() {
     const [user, setUser] = useState({ username: '', password: '' })
@@ -26,30 +27,38 @@ function Login() {
     //   })
     }
 
+    const Button = styled.button`
+    width: 100%;
+    background: #efe3e1;
+    color: #232432;
+    border-radius: 5px;
+ `
+
     return (
         <div>
-            <form onSubmit={handleSubmit} className="pure-form">
+            <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
                     <legend>Log In</legend>
                     <input 
+                        style={{marginBottom: "15px"}}
                         type="text" 
                         name="username"
-                        placeholder="Username"
                         onChange={inputChangeHandler}
                         value={user.email}
                     />
                     <input 
+                        style={{marginBottom: "15px"}}
+                        className="input-class"
                         type="password" 
                         name="password"
-                        placeholder="Password"
                         onChange={inputChangeHandler}
                         value={user.password}
                     />
-                    <button 
+                    <Button 
                         type="submit" 
                         className="pure-button pure-button-primary">
                         Sign in
-                    </button>
+                    </Button>
                 </fieldset>
             </form>
         </div>

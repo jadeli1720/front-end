@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import '../../signup.css';
+import './signup.css';
 
 const SignUp = () => {
 
-  const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '' })
+  const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
 
   const inputChangeHandler = event => {
-    setUser({ ...user, [event.target.name] : [event.target.value] })
+    setUser({ ...user, [event.target.name] : event.target.value })
   }
 
  const handleSubmit = event => {
@@ -28,7 +28,7 @@ const SignUp = () => {
     //     setUser({
     //       firstname: "", lastname: "", email: "", password: ""
     //   })
-   setUser({ firstname: "", lastname: "", email: "", password: "" })
+   setUser({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
  }
 
  const Button = styled.button`
@@ -37,8 +37,6 @@ const SignUp = () => {
     color: #232432;
     border-radius: 5px;
  `
-
- 
 
  return (
     <div className="form">
@@ -89,8 +87,8 @@ const SignUp = () => {
              <label htmlFor="password">Confirm Password</label>
              <input 
                type="password"
-               name="password"
-               value={user.password}
+               name="confirmpassword"
+               value={user.confirmpassword}
                onChange={inputChangeHandler}
              />
            </div>
