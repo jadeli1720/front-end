@@ -9,6 +9,7 @@ import  { HorizontalGridLines,
   LineMarkSeries, LineSeries } from 'react-vis';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import styled from 'styled-components';
 
 const data = [
   // {x: 0, y: 0},
@@ -51,49 +52,64 @@ const averageMood = 3;
 const averageSleep = 6;
 const recommendedSleep = 7;
 
+const CircleWrap = styled.div`
+  width: 25%; 
+  margin: 30px
+`
+
+const RowWrap = styled.div`
+  display: flex;
+  justify-content: center
+`
+const Text = styled.p`
+  text-align: center; 
+  font-size: 16px
+`
 
 const Home = () => {
 
   return (
-    <div>
-    <h3>Your sleep for August</h3>
-    <XYPlot height={300} width={500}>
-      <XAxis tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
-                          14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}/>
-      <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}/>
-      <LineSeries data={data} />
-    </XYPlot>
-    <h3 style={{textAlign: 'center'}}>Sleep and Mood History for August.</h3>
-    <div style={{display: 'flex', justifyContent: 'center', margin: '20px'}}>
-      <div style={{width: '25%', margin: '15px'}}>
-      <p style={{textAlign: 'center', fontSize: '16px'}}>Longest Sleep</p>
-        <CircularProgressbar 
-        styles={buildStyles({
-          // textSize: '7px'
-        })}
-        value={longestSleep} text={`${longestSleep}`} maxValue={12}/>
+    <div style={{margin: '10px'}}>
+      <h2 style={{marginLeft: '10px'}}>Your sleep for August</h2>
+      <div>
+        <XYPlot height={300} width={470}>
+          <XAxis tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+                              14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}/>
+          <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}/>
+          <LineSeries data={data} />
+        </XYPlot>
       </div>
-      <div style={{width: '25%', margin: '15px'}}>
-        <p style={{textAlign: 'center', fontSize: '16px'}}>Shortest Sleep</p>
-        <CircularProgressbar value={shortestSleep} text={`${shortestSleep}`} maxValue={12}/>
-      </div>
-    </div>
-    <div style={{display: 'flex', justifyContent: 'center', margin: '20px'}}>
-      <div style={{width: '25%', margin: '15px'}}>
-        <p style={{textAlign: 'center', fontSize: '16px'}}>Average Mood</p>
-        <CircularProgressbar value={averageMood} text={`${averageMood}`} maxValue={4}/>
-      </div>
-      <div style={{width: '25%', margin: '15px'}}>
-        <p style={{textAlign: 'center', fontSize: '16px'}}>Average Sleep</p>
-        <CircularProgressbar value={averageSleep} text={`${averageSleep}`} maxValue={12}/>
-      </div>
-    </div>
-    <div style={{display: 'flex', justifyContent: 'center', margin: '20px'}}>
-      <div style={{width: '25%', margin: '15px'}}>
-        <p style={{textAlign: 'center', fontSize: '16px'}}>Recommended Hours</p>
-        <CircularProgressbar value={recommendedSleep} text={`${recommendedSleep}`} maxValue={12}/>
-      </div>
-    </div>
+      <h2 style={{textAlign: 'center'}}>Sleep and Mood History for August.</h2>
+      <RowWrap>
+        <CircleWrap>
+          <Text>Longest Sleep</Text>
+          <CircularProgressbar 
+          styles={buildStyles({
+            // textSize: '7px'
+          })}
+          value={longestSleep} text={`${longestSleep}`} maxValue={12}/>
+        </CircleWrap>
+        <CircleWrap>
+          <Text>Shortest Sleep</Text>
+          <CircularProgressbar value={shortestSleep} text={`${shortestSleep}`} maxValue={12}/>
+        </CircleWrap>
+      </RowWrap>
+      <RowWrap>
+        <CircleWrap>
+          <Text>Average Mood</Text>
+          <CircularProgressbar value={averageMood} text={`${averageMood}`} maxValue={4}/>
+        </CircleWrap>
+        <CircleWrap>
+          <Text>Average Sleep</Text>
+          <CircularProgressbar value={averageSleep} text={`${averageSleep}`} maxValue={12}/>
+        </CircleWrap>
+      </RowWrap>
+      <RowWrap>
+        <CircleWrap>
+          <Text>Recommended Hours</Text>
+          <CircularProgressbar value={recommendedSleep} text={`${recommendedSleep}`} maxValue={12}/>
+        </CircleWrap>
+      </RowWrap>
     </div>
   )
 }
