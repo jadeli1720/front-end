@@ -74,7 +74,7 @@ const LandingPage = () => {
         </Card>
         <Card>
             <h5>Mood</h5>
-            {/* Emoji Icons go here */}
+            <img src="https://i.imgur.com/WO5mgjr.png" alt="Example mood buttons" />
             <p>Add your mood by using the emoji score system and based on hours slept, we will determine how many hours of sleep you need to feel your very best.</p>
         </Card>
         <Card>
