@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Form } from 'formik';
+import {Context} from './Context/context'
 
 
-const CreateSleepEntry = () => {
-    const [addSleepEntry] = useState ('')
-    const [day, setDay] = useState ('')
-    const [hours, setHours] = useState ('')
+export const CreateSleepEntry = () => {
+    //const {addSleepEntry} = useContext(Context)
+    const [day, setDay] = useState('')
+    const [hours, setHours] = useState('')
 
     const handleDayChange = e => {
         setDay(e.target.value);
@@ -16,14 +18,14 @@ const CreateSleepEntry = () => {
 
     const submitSleepEntry = e => {
     e.preventDefault();
-    addSleepEntry(e, day, hours);
-    // setDay(‘’);
-    // setHours(‘’)
+    //addSleepEntry(e, day, hours);
+    setDay('');
+    setHours('');
     };
     
     return (
-      <div>
-        <form onSubmit={submitSleepEntry}>
+    <div>
+        <Form onSubmit={submitSleepEntry}>
             <h2>Add Sleep Entry</h2>
         <input 
             onChange={handleDayChange}
@@ -38,8 +40,8 @@ const CreateSleepEntry = () => {
             name="Hours"
             />
             <button>Add Entry</button> 
-        </form>
-      </div>
+        </Form>
+    </div>
 
     ) 
 
