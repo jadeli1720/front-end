@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
 import  { HorizontalGridLines,
   VerticalGridLines,
@@ -10,6 +10,7 @@ import  { HorizontalGridLines,
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
+import Calendar from 'react-calendar';
 
 const data = [
   // {x: 0, y: 0},
@@ -53,29 +54,39 @@ const averageSleep = 6;
 const recommendedSleep = 7;
 
 const CircleWrap = styled.div`
-  width: 25%; 
-  margin: 30px
+  width: 30%; 
+  margin: 30px;
 `
 
 const RowWrap = styled.div`
   display: flex;
-  justify-content: center
+  justify-content: center;
 `
 const Text = styled.p`
   text-align: center; 
-  font-size: 16px
+  font-size: 16px;
+  white-space:nowrap
 `
 
 const Home = () => {
+  const [xAxisValues, setXAxisValues] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+    14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]);
+
+  useEffect(() => {
+
+  })
+
+  const handleChange = () => {
+
+  }
 
   return (
-    <div style={{margin: '10px'}}>
+    <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
       <h2 style={{marginLeft: '10px'}}>Your sleep for August</h2>
       <div>
         <XYPlot height={300} width={470}>
-          <XAxis tickValues={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
-                              14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]}/>
-          <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}/>
+          <XAxis tickValues={xAxisValues}/>
+          <YAxis tickValues={['', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}/>
           <LineSeries data={data} />
         </XYPlot>
       </div>
@@ -110,6 +121,15 @@ const Home = () => {
           <CircularProgressbar value={recommendedSleep} text={`${recommendedSleep}`} maxValue={12}/>
         </CircleWrap>
       </RowWrap>
+      <div>
+        <h2 style={{textAlign: 'center'}}>See additional sleep history by week.</h2>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <Calendar 
+            onChange={handleChange}
+            value={new Date()}
+          />
+        </div>
+      </div>
     </div>
   )
 }
