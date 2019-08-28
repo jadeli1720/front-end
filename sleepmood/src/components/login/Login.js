@@ -71,7 +71,7 @@ function Login() {
                     </Button>
                 </fieldset>
             </form>
-            <p style={{textAlign: "center"}}>Forgot Password?<Link to="/login">Click here.</Link></p>
+            <p style={{textAlign: "center", color: "white"}}>Forgot Password? <Link to="/login">Click here.</Link></p>
         </FormDiv>
     )
 }
