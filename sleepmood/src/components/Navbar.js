@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const NavBar = () => {
 
-  const HeaderWrapper = styled.section`
+    const HeaderWrapper = styled.section`
     display: flex;
     text-align: center;
     border-bottom: 1px solid #D0C9B4;
@@ -67,6 +67,7 @@ const NavBar = () => {
     }
   `;
 
+<<<<<<< HEAD
   return (
     <HeaderWrapper>
       <div className='iconDiv'>
@@ -90,6 +91,31 @@ const NavBar = () => {
       </div>
     </HeaderWrapper>
   )
+=======
+    return (
+        <HeaderWrapper>
+            <div className='iconDiv'>
+                <Icon name='cloud' className='cloud' />
+                <Icon name='moon' className='moon' />
+                <h1>sleepmood</h1>
+            </div>
+            <div className='menuDiv'>
+                <Menu className='menuBox' compact>
+                    <Dropdown icon='user' className='menuIcon'>
+                        <Dropdown.Menu className='menuLinks'>
+                            <Dropdown.Item as={NavLink} to='/home'>Home</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/SleepHistory'>Sleep History</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/CreateSleepEntry'>Create Sleep Entry</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/Settings'>Settings</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/Help'>Help</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to='/'>Sign out</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Menu>
+            </div>
+        </HeaderWrapper>
+    )
+>>>>>>> origin
 }
 
 export default NavBar
