@@ -7,7 +7,7 @@ import Warning from './Warning';
 import './signup.css';
 
 
-const SignUp = () => {
+const SignUp = (props) => {
 
   const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
 

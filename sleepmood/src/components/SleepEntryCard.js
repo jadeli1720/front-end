@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const SleepEntryCard = props => {
-    const {sleepdate,wakedate,sleephours, wakehours, avgmood}
+//    const { sleepdate,wakedate,sleephours, wakehours, avgmood}
     return (
         <div className = "SleepEntryCard">
             <h3></h3>

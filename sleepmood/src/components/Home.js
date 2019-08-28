@@ -8,7 +8,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 import Calendar from 'react-calendar';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import  {axiosWithAuth}  from '../utils/axiosWithAuth';
 
 
 const CircleWrap = styled.div`
