@@ -22,11 +22,38 @@
   width: 350px;
   max-width: 100%;
   background: white;
-  border: 1px solid #a0a096;
-  border-radius: 5px;
+  border: 5px solid #B07568;
+  border-radius: 3px;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
 
+}
+
+.react-calendar__tile--active {
+  background: #006edc;
+  background-color: red;
+  /* font-size: 30px */
+}
+
+.rv-xy-plot__axis__tick__line {
+  stroke: transparent;
+  stroke-width: 0px;
+}
+
+/* .rv-xy-plot__series--line {
+  fill: none;
+  stroke: white;
+  stroke-width: 6px;
+} */
+
+.rv-xy-plot__grid-lines {
+  background: red;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: green;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
 }
 
 label {
