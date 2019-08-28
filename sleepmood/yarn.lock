@@ -756,11 +756,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.3.2"
 
-<<<<<<< HEAD
-"@babel/runtime@7.5.5", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.5":
-=======
 "@babel/runtime@7.5.5", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.1.5", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.5":
->>>>>>> origin
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
   integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
@@ -6238,7 +6234,11 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
+<<<<<<< HEAD
+lodash-es@^4.17.14:
+=======
 lodash-es@^4.17.11, lodash-es@^4.17.14:
+>>>>>>> origin
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
   integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
@@ -6396,11 +6396,14 @@ mem@^4.0.0:
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 memoize-one@^4.0.3:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-4.1.0.tgz#a2387c58c03fff27ca390c31b764a79addf3f906"
   integrity sha512-2GApq0yI/b22J2j9rhbrAlsHb0Qcz+7yWxeLG8h+95sl1XPUgeLimQSOdur4Vw7cUhrBHwaUZxWFZueojqNRzA==
 
+>>>>>>> origin
 >>>>>>> origin
 memoize-one@^5.0.0:
   version "5.1.1"
@@ -6423,12 +6426,18 @@ merge-anything@^2.2.4:
     is-what "^3.3.1"
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin
 merge-class-names@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/merge-class-names/-/merge-class-names-1.2.0.tgz#cb30ecfc3bdbd96b6f76d0a98777907e5fbb3462"
   integrity sha512-ifHxhC8DojHT1rG3PHCaJYInUqPd0WO+PxsaYDMkgy7RzfyOFtnlpr/hbhki+m/3R/ujIRVnZkD/AHjgjb5uhg==
 
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin
 >>>>>>> origin
 merge-deep@^3.0.2:
   version "3.0.2"
@@ -8222,6 +8231,9 @@ prompts@^2.0.1:
 <<<<<<< HEAD
 prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
 =======
+<<<<<<< HEAD
+prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+=======
 prop-types-extra@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/prop-types-extra/-/prop-types-extra-1.1.0.tgz#32609910ea2dcf190366bacd3490d5a6412a605f"
@@ -8231,6 +8243,7 @@ prop-types-extra@^1.1.0:
     warning "^3.0.0"
 
 prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+>>>>>>> origin
 >>>>>>> origin
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
@@ -8405,6 +8418,9 @@ react-app-polyfill@^1.0.2:
     whatwg-fetch "3.0.0"
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin
 react-calendar@^2.19.1:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/react-calendar/-/react-calendar-2.19.1.tgz#6d56ec4abc5c93681b980e46fedb86712542531e"
@@ -8414,6 +8430,8 @@ react-calendar@^2.19.1:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
+<<<<<<< HEAD
+=======
 =======
 react-big-calendar@^0.22.0:
   version "0.22.0"
@@ -8434,6 +8452,7 @@ react-big-calendar@^0.22.0:
     uncontrollable "^6.2.3"
     warning "^4.0.2"
 >>>>>>> origin
+>>>>>>> origin
 
 react-circular-progressbar@^2.0.2:
   version "2.0.2"
@@ -8442,11 +8461,14 @@ react-circular-progressbar@^2.0.2:
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 react-context-toolbox@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-context-toolbox/-/react-context-toolbox-2.0.2.tgz#35637287cb23f801e6ed802c2bb7a97e1f04e3fb"
   integrity sha512-tY4j0imkYC3n5ZlYSgFkaw7fmlCp3IoQQ6DxpqeNHzcD0hf+6V+/HeJxviLUZ1Rv1Yn3N3xyO2EhkkZwHn0m1A==
 
+>>>>>>> origin
 >>>>>>> origin
 react-context@0.0.3:
   version "0.0.3"
@@ -8510,19 +8532,29 @@ react-fast-compare@^2.0.1:
 <<<<<<< HEAD
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
 =======
+<<<<<<< HEAD
+react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
+=======
 react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
+>>>>>>> origin
 >>>>>>> origin
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin
 >>>>>>> origin
 react-motion@^0.5.2:
   version "0.5.2"
@@ -8533,6 +8565,9 @@ react-motion@^0.5.2:
     prop-types "^15.5.8"
     raf "^3.1.0"
 
+<<<<<<< HEAD
+react-popper@^1.3.3:
+=======
 <<<<<<< HEAD
 react-popper@^1.3.3:
 =======
@@ -8551,6 +8586,7 @@ react-overlays@^1.2.0:
     warning "^4.0.2"
 
 react-popper@^1.3.2, react-popper@^1.3.3:
+>>>>>>> origin
 >>>>>>> origin
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.4.tgz#f0cd3b0d30378e1f663b0d79bcc8614221652ced"
@@ -10395,6 +10431,8 @@ walker@^1.0.7, walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
+<<<<<<< HEAD
+=======
 warning@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
@@ -10402,6 +10440,7 @@ warning@^3.0.0:
   dependencies:
     loose-envify "^1.0.0"
 
+>>>>>>> origin
 warning@^4.0.2, warning@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
