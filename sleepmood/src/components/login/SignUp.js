@@ -3,17 +3,32 @@ import axios from 'axios';
 import { axiosLoginAuth } from '../../utils/axiosWithAuth';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Warning from './Warning';
+import './signup.css';
 
-const SignUp = (props) => {
 
-  const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '' })
+const SignUp = () => {
+
+  const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
+
+  const handleConfirm = () => {
+    const {password, confirmpassword} = user;
+    // perform all neccessary validations
+    if (password !== confirmpassword) {
+      return 
+    } 
+  }
 
   const inputChangeHandler = event => {
-    setUser({ ...user, [event.target.name]: event.target.value })
+    setUser({ ...user, [event.target.name] : event.target.value })
   }
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    // handleConfirm()
+    // Warning/Error Popup
+
     console.log(user);
     //  This is the post request that allows connection to backend
     axios.post("https://sleep-mood-db.herokuapp.com/createnewuser", user)
@@ -44,17 +59,13 @@ const SignUp = (props) => {
 
   }
 
-  //  const Form = styled.form`
-  //     display: flex;
-  //     justify-content: center;
-  //     font-size: 1.2rem;
-  //  `
-
   const Button = styled.button`
     color: black;
     background: #f3f3f3;
     width: 100%;
-    border: 1px solid #b0b0b0;
+    background: #b07568;
+    color: #231f14;
+    border-radius: 5px;
  `
 
   const Div = styled.div`
@@ -118,7 +129,6 @@ const SignUp = (props) => {
           <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
         </fieldset>
       </form>
-
       <p style={{ textAlign: "center", color: 'white' }}>Already have an account? <Link to="/login">Sign In.</Link></p>
     </div>
   )
