@@ -14,18 +14,20 @@ const SignUp = () => {
    event.preventDefault();
    console.log(user);
    //This is the post request that allows connection to backend
-    //     axios.post(`  `, user)
-    //     .then(res => {
-    //       localStorage.setItem('token', res.data.payload);
-    //       props.history.push('/home');
-    //       console.log('Successful Login', res.data)
-    //     })
-    //     .catch(err => {
-    //       console.log('Opps, Something happened!', err.response)
-    //     }) 
-    //     setUser({
-    //       firstname: "", lastname: "", email: "", password: ""
-    //   })
+  //  axiosLoginAuth()
+  //  .post('/login',`grant_type=password&username=${user.username}&password=${user.password}`)
+  //  .then(res => {
+  //      localStorage.setItem("token", res.data["access_token"]);
+  //      localStorage.setItem("tokenType", res.data["token_type"]);
+  //      props.history.push('/home');
+  //      console.log('Successful Login', res.data)
+  //  })
+  //  .catch(err => {
+  //    console.log('Opps, Something happened!', err.response)
+  //  }) 
+  //       setUser({
+  //         firstname: "", lastname: "", email: "", password: ""
+  //     })
    setUser({ firstname: "", lastname: "", email: "", password: "" })
  }
 

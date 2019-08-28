@@ -1,6 +1,13 @@
-/* @import url('https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap');
 
 .App {
+  background-color: #191D37 ;
+  background-image: url('https://i.imgur.com/QHWwH4G.png');
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-attachment: fixed;
+  background-size: auto;
+  padding:30px 0;
   margin: 0 auto;
   max-width: 500px;
   width: 100%;
