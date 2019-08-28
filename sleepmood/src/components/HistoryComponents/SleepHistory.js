@@ -2,7 +2,7 @@ import React from 'react';
 // import { Header, Table } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-import MyBigCalendar from './BigCalander';
+import BigCalendar from './BigCalander';
 
 const CalenderContainer = styled.div`
     border-radius:5px;
@@ -20,6 +20,23 @@ const Title = styled.h1`
     text-align: center;
 `;
 
+const ButtonContainer = styled.div`
+    text-align: center;
+    width: 460px;
+
+    button{
+      margin: 50px auto 30px;
+      background: #C1b89c;
+        border-radius: 5px;
+        border: none;
+        color: #191D37;
+        font-weight: bold;
+        padding: 8px 5px;
+        text-align: center;
+        width: 140px;
+    }
+`;
+
 
 const SleepHistory = () => {
 
@@ -27,9 +44,12 @@ const SleepHistory = () => {
     <div>
       <Title>Sleep History By Month</Title>
       <CalenderContainer>
-      <MyBigCalendar/>
-      
+        <BigCalendar />
       </CalenderContainer>
+      
+      <ButtonContainer>
+        <button>See More</button>
+      </ButtonContainer>
 
     </div>
   )
