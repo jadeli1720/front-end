@@ -1,0 +1,27 @@
+form {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: #232432;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
+
+input {
+    color: black;
+}
+
+.pure-control-group {
+    margin-bottom: 15px;
+}
+
+.form {
+    background: #232432;
+    color: white;
+    padding: 10px 0;
+}
+
