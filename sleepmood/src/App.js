@@ -17,14 +17,14 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Route exact path='/home' component={Home} />
       <Route exact path='/' component={LandingPage} />
       <Route path='/login' component={Login} />
       <Route path="/signup" component={SignUp} />
-      <Route path="/CreateSleepEntry" component={CreateSleepEntry} />
-      <Route path='/SleepHistory' component={SleepHistory} />
-      <Route path='/Help' component={Help} />
-      <Route path='Settings.js' component={Settings} />
+      <PrivateRoute exact path='/home' component={Home} />
+      <PrivateRoute path="/CreateSleepEntry" component={CreateSleepEntry} />
+      <PrivateRoute path='/SleepHistory' component={SleepHistory} />
+      <PrivateRoute path='/Help' component={Help} />
+      <PrivateRoute path='Settings.js' component={Settings} />
     </div>
   );
 }

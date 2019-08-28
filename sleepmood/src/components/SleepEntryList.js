@@ -1,21 +1,44 @@
 import React from 'react';
-import {Context } from "./context/context"
+//import {Context} from "./context/context"
+import axioswithAuth from './utils/axioswithAuth';
 
-
-const EntryList = ({ entrys, UpdateEntrys}) => {
-    const {sleepentrys} = useState('')
-    const [editing, setEditing] = useState(false);
-    const [ToEdit, setEntryToEdit] = useState(initialentry);
-}
-return (
-    sleepentrys.map (sleepentry => {
-        <div>
-            <h2>{props.sleepentry.date}</h2>
-            <h3>{props.sleepentry.hours}</h3>
-
-        </div>
+;
+export default class SleepEntryList extends Component {
+    constructor(props) {
+        super(props);
+        this.state ={
+            sleepentrys: []
+        };
     }
 
-    ))
+    componentDidMount(){
+        axiosWithAuth
+        .get()
+        .then()
+        .catch(err => console.log(err.response));
+    }
 
+render(){
+    // render() {
+    // return (
+    //     <div className="sleepentrylist">
+    //         {this.state.sleepentrys.map(sleepentry => (
+    //         <SleepEntryDetails key={} />
+    //         ))}
+    //     </div>
+    //     );
+    // }
+    // }
+    
+    // function SleepEntryDetails({ sleepentry }) {
+    return (
+        <Link to={'/'}>
+        <SleepEntryCard sleepentry={sleepentry} />
+        </Link>
+    )
+    // }
+  }
+}
+    
+  
     
