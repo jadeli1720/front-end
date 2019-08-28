@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import './Login.css';
 
 function Login() {
     const [user, setUser] = useState({ username: '', password: '' })
@@ -29,16 +32,22 @@ function Login() {
 
     const Button = styled.button`
     width: 100%;
-    background: #efe3e1;
+    background: #d0c9b4;
     color: #232432;
     border-radius: 5px;
  `
 
+ const FormDiv = styled.div`
+    background: #232432;
+    padding: 10px 0;
+ `
+
     return (
-        <div>
+        <FormDiv className="">
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
-                    <legend>Log In</legend>
+                    <legend style={{color: "white"}}>Sign in to sleep mood</legend>
+                    <label htmlFor="email">Email</label>
                     <input 
                         style={{marginBottom: "15px"}}
                         type="text" 
@@ -46,6 +55,7 @@ function Login() {
                         onChange={inputChangeHandler}
                         value={user.email}
                     />
+                    <label htmlFor="password">Password</label>
                     <input 
                         style={{marginBottom: "15px"}}
                         className="input-class"
@@ -61,7 +71,8 @@ function Login() {
                     </Button>
                 </fieldset>
             </form>
-        </div>
+            <p style={{textAlign: "center"}}>Forgot Password?<Link to="/login">Click here.</Link></p>
+        </FormDiv>
     )
 }
 

@@ -2,11 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Warning from './Warning';
 import './signup.css';
 
 const SignUp = () => {
 
   const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
+
+  const handleConfirm = () => {
+    const {password, confirmpassword} = user;
+    // perform all neccessary validations
+    if (password !== confirmpassword) {
+      return 
+    } 
+  }
 
   const inputChangeHandler = event => {
     setUser({ ...user, [event.target.name] : event.target.value })
@@ -31,12 +40,15 @@ const SignUp = () => {
    setUser({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
  }
 
+
+
  const Button = styled.button`
     width: 100%;
-    background: #efe3e1;
-    color: #232432;
+    background: #b07568;
+    color: #231f14;
     border-radius: 5px;
  `
+
 
  return (
     <div className="form">
@@ -92,6 +104,7 @@ const SignUp = () => {
                onChange={inputChangeHandler}
              />
            </div>
+           {handleConfirm}
            <Button type="submit" className="pure-button pure-button-primary">Create Account</Button>
          </fieldset>
        </form>
