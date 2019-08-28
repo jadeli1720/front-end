@@ -15,6 +15,7 @@ const NavBar = () => {
     .iconDiv {
       display: flex;
       margin: 1rem 0rem 2rem 0;
+
       .cloud {
         font-size: 4rem;
         color: #4A549C;
@@ -39,6 +40,7 @@ const NavBar = () => {
         left: -3rem;
         z-index: 3;
         color: white;
+
       }
     }
 
@@ -65,6 +67,11 @@ const NavBar = () => {
         }
       }
     }
+
+  .menuDiv{
+    width: 8rem;
+    justify-content: center;
+  }
   `;
 
 

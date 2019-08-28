@@ -7,14 +7,15 @@
   background-origin: border-box;
   background-attachment: fixed;
   background-size: auto;
+    /* border: 1px pink solid; */
+  font-family: 'Roboto', serif;
   padding:30px 0;
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 460px;
   width: 100%;
   text-align: left;
   background-image: url('https://i.imgur.com/QHWwH4G.png');
 }
-
 
 /* HOME COMPONENT */
 .react-calendar {
@@ -25,4 +26,9 @@
   border-radius: 5px;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+
+}
+
+label {
+  color: #efe3e1;
 }

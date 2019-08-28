@@ -1,44 +1,54 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 //import {Context} from "./context/context"
-import axioswithAuth from './utils/axioswithAuth';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import SleepEntryCard from "./SleepEntryCard";
+import { Link } from "react-router-dom";
 
-;
-export default class SleepEntryList extends Component {
-    constructor(props) {
-        super(props);
-        this.state ={
-            sleepentrys: []
-        };
-    }
+const SleepEntryList = ({ sleepentrys, updateSleepentrys }) => {
+  console.log(sleepentrys);
+  const [editing, setEditing] = useState(false);
+  const [sleepentryToEdit, setSleepentryToEdit] = useState({});
 
-    componentDidMount(){
-        axiosWithAuth
-        .get()
-        .then()
-        .catch(err => console.log(err.response));
-    }
+  useEffect(() => {
+    axiosWithAuth()
+      .get("https://sleep-mood-db.herokuapp.com/sleep/all")
+      .then(res => this.setState({ sleepentrys: res.data }))
+      .catch(err => console.log(err.response));
+  }, []);
 
-render(){
-    // render() {
-    // return (
-    //     <div className="sleepentrylist">
-    //         {this.state.sleepentrys.map(sleepentry => (
-    //         <SleepEntryDetails key={} />
-    //         ))}
-    //     </div>
-    //     );
-    // }
-    // }
-    
-    // function SleepEntryDetails({ sleepentry }) {
-    return (
-        <Link to={'/'}>
-        <SleepEntryCard sleepentry={sleepentry} />
-        </Link>
-    )
-    // }
-  }
-}
-    
-  
-    
+  const editsleepentry = sleepentry => {
+    setEditing(true);
+    setSleepentryToEdit(sleepentry);
+  };
+
+  const saveEdit = e => {
+    e.preventDefault();
+    e.preventDefault();
+    axiosWithAuth()
+      .put("https://sleep-mood-db.herokuapp.com/", sleepentryToEdit)
+      .then(res => {
+        updateSleepentrys(
+          sleepentrys.map(sleepentry => {
+            if (sleepentry.id === sleepentryToEdit.id) return res.data;
+            else return sleepentry;
+          })
+        );
+        setEditing(false);
+        setSleepentryToEdit({});
+      })
+      .catch(err => console.log(err));
+  };
+
+  const deleteSleepentry = (sleepentry, e) => {
+    e.stopPropagation();
+    axiosWithAuth()
+      .delete("https://sleep-mood-db.herokuapp.com/")
+      .then(res => {
+        updateSleepentrys(
+          sleepentrys.filter(sleepentryCheck => sleepentryCheck.id !== res.data)
+        );
+      })
+      .catch(err => console.log(err));
+  };
+};
+export default SleepEntryList;
