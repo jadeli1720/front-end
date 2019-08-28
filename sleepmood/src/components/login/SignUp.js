@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const SignUp = () => {
+const SignUp = (props) => {
 
   const [user, setUser] = useState({firstname: '', lastname: '', email: '', password: ''})
 
@@ -13,27 +14,26 @@ const SignUp = () => {
  const handleSubmit = event => {
    event.preventDefault();
    console.log(user);
-   //This is the post request that allows connection to backend
-    //     axios.post(`  `, user)
-    //     .then(res => {
-    //       localStorage.setItem('token', res.data.payload);
-    //       props.history.push('/home');
-    //       console.log('Successful Login', res.data)
-    //     })
-    //     .catch(err => {
-    //       console.log('Opps, Something happened!', err.response)
-    //     }) 
-    //     setUser({
-    //       firstname: "", lastname: "", email: "", password: ""
-    //   })
-   setUser({ firstname: "", lastname: "", email: "", password: "" })
+  //  This is the post request that allows connection to backend
+        axios.post("https://sleep-mood-db.herokuapp.com//createnewuser", user)
+        .then(res => {
+          props.history.push('/login');
+          console.log('Successful Login', res.data)
+        })
+        .catch(err => {
+          console.log('Opps, Something happened!', err.response)
+        }) 
+        setUser({
+          firstname: "", lastname: "", email: "", password: ""
+      })
+   
  }
 
- const Form = styled.form`
-    display: flex;
-    justify-content: center;
-    font-size: 1.2rem;
- `
+//  const Form = styled.form`
+//     display: flex;
+//     justify-content: center;
+//     font-size: 1.2rem;
+//  `
 
  const Button = styled.button`
     color: black;
@@ -49,7 +49,7 @@ const SignUp = () => {
  return (
    <div>
       <h2 style={{textAlign: "center"}}>Create your sleepmood account.</h2>
-      <Form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
+      <form onSubmit={handleSubmit} className="stacked">
         <fieldset>
           <Div className="pure-control-group">
             <label htmlFor="firstname">First Name</label>
@@ -102,9 +102,9 @@ const SignUp = () => {
           </Div>
           <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
         </fieldset>
-      </Form>
+      </form>
 
-      <p style={{textAlign: "center"}}>Already have an account? <Link to="/login">Sign In.</Link></p>
+      <p style={{textAlign: "center", color: 'white'}}>Already have an account? <Link to="/login">Sign In.</Link></p>
     </div>
   )
 }

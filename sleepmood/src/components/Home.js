@@ -1,12 +1,9 @@
 import React from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import  { HorizontalGridLines,
-  VerticalGridLines,
-  VerticalBarSeries,
+import  { 
   XAxis,
   YAxis,
-  XYPlot,
-  LineMarkSeries, LineSeries } from 'react-vis';
+  XYPlot, LineSeries } from 'react-vis';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
