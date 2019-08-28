@@ -12,6 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { getRecommendedHoursOfSleep, getGraphData } from './../helpers.js';
 
 const CircleWrap = styled.div`
   width: 20%; 
@@ -61,113 +62,28 @@ const Home = () => {
     axiosWithAuth()
     .get('/sleep/all')
     .then(res => {
-      let arr = res.data;
-      console.log(arr)
-      let storage = {};
-      arr.forEach(item => {
-        let md = [item.sleepdate[1], item.sleepdate[2]].join(' ');
-        let year = [item.sleepdate[0]].toString();
-        let time = [item.sleepdate[3], item.sleepdate[4]].join(':');
-        let start = new Date(md + ', ' + year + ' ' + time);
+      let data = res.data;
+      console.log(data)
 
-        let md2 = [item.wakedate[1], item.wakedate[2]].join(' ');
-        let year2 = [item.wakedate[0]].toString();
-        let time2 = [item.wakedate[3], item.wakedate[4]].join(':');
-        let finish = new Date(md2 + ', ' + year2 + ' ' + time2);
+      let recommendedHours = getRecommendedHoursOfSleep(data);
+      setRecommendedSleep(recommendedHours);
 
-        let hours = getHours(start, finish);
-        if (storage[hours]) {
-          storage[hours].push(Math.round((item.sleepmood + item.wakemood + item.daymood) / 3));
-        } else {
-          storage[hours] = [Math.round((item.sleepmood + item.wakemood + item.daymood) / 3)];
-        }
-      })
+      let week = data.slice(data.length - 7);
 
-      let max = [0, 0];
-      for (let key in storage) {
-        if (storage[key].length > 1) {
-          let avg = storage[key].reduce((acc, val) => {return acc += val}, 0) / storage[key].length;
-          console.log('AVG', avg, 'Hour', key)
-          if (avg > max[0]) {
-            max[0] = avg;
-            max[1] = key;
-          }
-        }
-      }
-      console.log(storage)
-      setRecommendedSleep(max[1]);
 
-      let slice = arr.slice(arr.length - 7);
-
-      let xAxis = slice.map(item => {
+      let xAxis = week.map(item => {
         return item.wakedate[2];
       })
-
-      let hoursArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-      let obj = {};
-      let userHours = [];
-      let moods = [];
-      
-
-      let graph = slice.map((item, index) => {
-
-        let md = [item.sleepdate[1], item.sleepdate[2]].join(' ');
-        let year = [item.sleepdate[0]].toString();
-        let time = [item.sleepdate[3], item.sleepdate[4]].join(':');
-        let start = new Date(md + ', ' + year + ' ' + time);
-
-        let md2 = [item.wakedate[1], item.wakedate[2]].join(' ');
-        let year2 = [item.wakedate[0]].toString();
-        let time2 = [item.wakedate[3], item.wakedate[4]].join(':');
-        let finish = new Date(md2 + ', ' + year2 + ' ' + time2);
-
-        if (index === 0) {
-          setStartDate((finish.getMonth() + 1) + '/' + finish.getDate());
-        }
-
-        if (index === slice.length - 1) {
-          setEndDate((finish.getMonth() + 1) + '/' + finish.getDate());
-        }
-
-        let hours = getHours(start, finish);
-        userHours.push(hours);
-        let moodAvr = (item.sleepmood + item.wakemood + item.daymood) / 3;
-        moods.push(moodAvr);
-
-        if (!obj[hours]) {
-          obj[hours] = 0;
-        } 
-        return {x: item.wakedate[2], y: hours}
-      })
-
-      hoursArr.forEach(num => {
-        if (!obj[num]) {
-          graph.push({y: num})
-        }
-      })
-      
-      let sortedUserHours = userHours.sort((a, b) => a - b);
-      let avrSleep = Math.round(userHours.reduce((acc, val) => {return acc += val}, 0) / userHours.length);
-      let avgWeekMood = Math.round(moods.reduce((acc, val) => {return acc += val}, 0) / moods.length);
-
       setXAxisValues(xAxis);
-      setGraphData(graph);
-      setLongestSleep(sortedUserHours[userHours.length - 1]);
-      setShortestSleep(sortedUserHours[0]);
-      setAverageSleep(avrSleep);
-      setAverageMood(avgWeekMood);
+
+      let graphData = getGraphData(week, setStartDate, setEndDate, setLongestSleep, setShortestSleep, setAverageSleep, setAverageMood);
+      setGraphData(graphData);
+
     })
     .catch(err => {
       console.log('HERE Opps, Something happened!', err)
     }) 
   }, [])
-
-  const getHours = (start, finish) => {
-    let diff = (finish.getTime() - start.getTime()) / 1000;
-    diff /= (60 * 60);
-    if (diff > 12) {diff = 12}
-    return Math.abs(Math.round(diff));
-  }
 
   const handleChange = (date) => {
     console.log([date, new Date('August 13, 2019')])
