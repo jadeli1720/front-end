@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // After Login
-export const axiosWithAuth = () => {
+export default axiosWithAuth = () => {
   const token = localStorage.getItem('token');
   const tokenType = localStorage.getItem('tokenType');
 

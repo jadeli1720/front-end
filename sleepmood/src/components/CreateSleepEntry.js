@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Form } from 'formik';
+import SleepEntryList from './SleepEntryList';
 //import {Context} from './Context/context'
 
 
@@ -39,18 +40,19 @@ export const CreateSleepEntry = () => {
     };
     
     return (
+    <>
     <div>
         <Form onSubmit={submitSleepEntry}>
             <h2>Add Sleep Entry</h2>
         <input 
             onChange={handleSleepdateChange}
-            placeholder = "Sleep Date"
+            placeholder = "Bedtime"
             value={sleepdate}
             name="SleepDate"
             />
         <input 
             onChange={handleWakedateChange}
-            placeholder = "Wake Date"
+            placeholder = "Waketime"
             value={wakedate}
             name="Wake Date"
             />
@@ -68,17 +70,18 @@ export const CreateSleepEntry = () => {
             />
             <input 
             onChange={handleAvgmoodChange}
-            placeholder = "Average Mood"
+            placeholder = "Overall Mood"
             value={avgmood}
             name="Average Mood"
             />
             <button>Add Entry</button> 
         </Form>
     </div>
+    <div> <SleepEntryList list={SleepEntryList}/>
+    </div>
+    </>
+    )
 
-    ) 
-
-
-}
+};
 
 export default CreateSleepEntry;
