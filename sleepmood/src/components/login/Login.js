@@ -17,7 +17,7 @@ function Login(props) {
             localStorage.setItem("token", res.data["access_token"]);
             localStorage.setItem("tokenType", res.data["token_type"]);
             props.history.push('/home');
-            console.log('Successful Login', res.data)
+            console.log('Successful Login', res)
         })
         .catch(err => {
           console.log('Opps, Something happened!', err.response)
