@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import { Calendar, momentLocalizer, Views  } from 'react-big-calendar';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';//needs to go in sass
 
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import events from './events'
+// import events from './events'
 
 const localizer = momentLocalizer(moment);
 
@@ -35,8 +35,6 @@ useEffect(() => {
   return getEvents()
 }, [])
 
-
-  // console.log(Views)
   return (
     <div style={{ height: 350 }}>
       <Calendar
@@ -50,7 +48,9 @@ useEffect(() => {
           
         }}
       />
-      {console.log(events)}
+
+
+      {/* {console.log(events)} */}
     </div>
   )
 }

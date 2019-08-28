@@ -17,16 +17,13 @@ const Title = styled.h1`
 `;
 
 const Intro = styled.p`
-    color: #edebe3;
-    font-size: 16px;
+    color: #cfd2e8;
+    font-size: 18px;
     font-weight: bold;
+    padding-top: 30px;
     text-align: center;
 `;
 
-const Heading = styled.h3`
-    color: #efe3e1;
-    font-size: 18px;
-`;
 
 const LinkContainer = styled.div`
     margin: 0 auto;
@@ -61,12 +58,25 @@ const LinkContainer = styled.div`
 
 `;
 
+const CardContainer = styled.div`
+    background: #232433;
+    margin: 20px 10px;
+`;
+
 const Card = styled.div`
-    background: #efe3e1 ;
+    background: white ;
     border-radius: 5px;
     color: #232433;
-    margin: 20px 5px;
-    padding: 15px;
+    margin: 5px 30px 20px;
+    padding: 15px 20px;
+`;
+
+const Heading = styled.h3`
+    color: #efe3e1;
+    font-family: 'Bitter', serif;
+    font-size: 20px;
+    padding: 20px 30px 5px;
+    
 `;
 
 const LandingPage = () => {
@@ -74,25 +84,27 @@ const LandingPage = () => {
     return (
         <HomeContainer>
             <Title>How much sleep do you need to optimize your life?</Title>
-            <Intro>Track your sleep and mood and we will figure out how much sleep you need to live your best life.</Intro>
+            <Intro>Let us figure out how many hours of sleep you need to live your best life.</Intro>
             <LinkContainer>
                 <Link to="/signup" className="create-account" >Create Account</Link>
                 <Link to="/login" className="login" >Login</Link>
 
             </LinkContainer>
-            <Heading>sleepmood basics</Heading>
-            <Card>
-                <h5><Icon name="line graph" /> Graphs</h5>
-                <p>Your sleep data will be calculated and then graphed allowing you to see variations in you sleep time by night</p>
-            </Card>
-            <Card>
-                <h5><Icon name="smile" /> Mood</h5>
-                <p>Add your mood by using the emoji score system and based on hours slept, we will determine how many hours of sleep you need to feel your very best.</p>
-            </Card>
-            <Card>
-                <h5><Icon name="linkify" /> Connect</h5>
-                <p>Connect our sleep tracker to your wearable technology and let it do the sleep tracking for you.</p>
-            </Card>
+            <CardContainer>
+                <Heading>sleepmood basics</Heading>
+                <Card>
+                    <h5><Icon name="line graph" /> Graphs</h5>
+                    <p>Your sleep data will be calculated and then graphed allowing you to see variations in you sleep time by night</p>
+                </Card>
+                <Card>
+                    <h5><Icon name="smile" /> Mood</h5>
+                    <p>Add your mood by using the emoji score system and based on hours slept, we will determine how many hours of sleep you need to feel your very best.</p>
+                </Card>
+                <Card>
+                    <h5><Icon name="linkify" /> Connect</h5>
+                    <p>Connect our sleep tracker to your wearable technology and let it do the sleep tracking for you.</p>
+                </Card>
+            </CardContainer>
 
         </HomeContainer>
     )
