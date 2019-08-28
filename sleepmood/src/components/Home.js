@@ -58,6 +58,40 @@ const Home = () => {
     .get('/sleep/all')
     .then(res => {
       let arr = res.data;
+    
+      let storage = {};
+      arr.forEach(item => {
+        let md = [item.sleepdate[1], item.sleepdate[2]].join(' ');
+        let year = [item.sleepdate[0]].toString();
+        let time = [item.sleepdate[3], item.sleepdate[4]].join(':');
+        let start = new Date(md + ', ' + year + ' ' + time);
+
+        let md2 = [item.wakedate[1], item.wakedate[2]].join(' ');
+        let year2 = [item.wakedate[0]].toString();
+        let time2 = [item.wakedate[3], item.wakedate[4]].join(':');
+        let finish = new Date(md2 + ', ' + year2 + ' ' + time2);
+
+        let hours = getHours(start, finish);
+        if (storage[hours]) {
+          storage[hours].push(Math.round((item.sleepmood + item.wakemood + item.avgmood) / 3));
+        } else {
+          storage[hours] = [Math.round((item.sleepmood + item.wakemood + item.avgmood) / 3)];
+        }
+      })
+
+      let max = [0, 0];
+      for (let key in storage) {
+        if (storage[key].length > 1) {
+          let avg = storage[key].reduce((acc, val) => {return acc += val}, 0) / storage[key].length;
+          if (avg > max[0]) {
+            max[0] = avg;
+            max[1] = key;
+          }
+        }
+      }
+
+      setRecommendedSleep(max[1]);
+
       let slice = arr.slice(arr.length - 7);
 
       let xAxis = slice.map(item => {
@@ -110,7 +144,7 @@ const Home = () => {
       let sortedUserHours = userHours.sort((a, b) => a - b);
       let avrSleep = Math.round(userHours.reduce((acc, val) => {return acc += val}, 0) / userHours.length);
       let avgWeekMood = Math.round(moods.reduce((acc, val) => {return acc += val}, 0) / moods.length);
-      
+
       setXAxisValues(xAxis);
       setGraphData(graph);
       setLongestSleep(sortedUserHours[userHours.length - 1]);
