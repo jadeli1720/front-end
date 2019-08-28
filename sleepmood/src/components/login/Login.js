@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { axiosLoginAuth } from '../../utils/axiosWithAuth'
 import './Login.css';
 
-function Login() {
-    const [user, setUser] = useState({ username: '', password: '' })
+
+function Login(props) {
+    const [user, setUser] = useState({ username: '', password: ''})
 
     const inputChangeHandler = event => {
         setUser({ ...user, [event.target.name] : [event.target.value] })
@@ -14,20 +15,23 @@ function Login() {
     const handleSubmit = event => {
         event.preventDefault();
         console.log(user);
+
         //This is the post request that allows connection to backend
-    //     axios.post(`  `, user)
-    //     .then(res => {
-    //       localStorage.setItem('token', res.data.payload);
-    //       props.history.push('/home');
-    //       console.log('Successful Login', res.data)
-    //     })
-    //     .catch(err => {
-    //       console.log('Opps, Something happened!', err.response)
-    //     }) 
-    //     setUser({
-    //       username: '',
-    //       password: ''
-    //   })
+        axiosLoginAuth()
+        .post('/login',`grant_type=password&username=${user.username}&password=${user.password}`)
+        .then(res => {
+            localStorage.setItem("token", res.data["access_token"]);
+            localStorage.setItem("tokenType", res.data["token_type"]);
+            props.history.push('/home');
+            console.log('Successful Login', res)
+        })
+        .catch(err => {
+          console.log('Opps, Something happened!', err.response)
+        }) 
+        setUser({
+          username: '',
+          password: ''
+      })
     }
 
     const Button = styled.button`
@@ -52,8 +56,9 @@ function Login() {
                         style={{marginBottom: "15px"}}
                         type="text" 
                         name="username"
+                        placeholder="Username"
                         onChange={inputChangeHandler}
-                        value={user.email}
+                        value={user.username}
                     />
                     <label htmlFor="password">Password</label>
                     <input 
