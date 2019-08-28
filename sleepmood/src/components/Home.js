@@ -13,7 +13,6 @@ import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-
 const CircleWrap = styled.div`
   width: 20%; 
   margin: 30px;
@@ -26,8 +25,9 @@ const RowWrap = styled.div`
 const Text = styled.p`
   text-align: center; 
   font-size: 16px;
+  font-weight: 600;
   white-space:nowrap;
-  color: white
+  color: #EFE3E1
 `
 
 const WhiteSpace = styled.div`
@@ -39,6 +39,10 @@ const CalendarWrap = styled.div`
   display: flex; 
   justify-content: center
 `
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 const Home = () => {
   const [xAxisValues, setXAxisValues] = useState([]);
@@ -161,6 +165,7 @@ const Home = () => {
   const getHours = (start, finish) => {
     let diff = (finish.getTime() - start.getTime()) / 1000;
     diff /= (60 * 60);
+    if (diff > 12) {diff = 12}
     return Math.abs(Math.round(diff));
   }
 
@@ -176,53 +181,111 @@ const Home = () => {
 
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
-      <h2 style={{marginLeft: '10px', color: 'white', marginTop: '20px'}}>Your sleep for {startDate} - {endDate}</h2>
+      <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
       <div>
         <XYPlot height={300} width={470}>
-          <XAxis tickValues={xAxisValues} />
-          <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} tickTotal={12}/>
-          <LineSeries data={graphData} />
+          <XAxis tickValues={xAxisValues} tickFormat={v =>  v * 1} style={{
+            // line: {stroke: '#F5F4EF', width: '4px'},
+            // ticks: {stroke: 'blue', strokeWidth: '4px'},
+            text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
+          }}/>
+          <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} tickTotal={12} style={{
+            // line: {stroke: '#F5F4EF', width: '4px'},
+            // ticks: {stroke: 'blue', strokeWidth: '4px'},
+            text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
+          }}/>
+          <HorizontalGridLines style={{backgroundColor: 'blue'}}/>
+          <LineSeries data={graphData} style={{stroke: '#4A549C', strokeWidth: 8}}/>
         </XYPlot>
       </div>
-      <h2 style={{textAlign: 'center', color: 'white'}}>Sleep and Mood History for August.</h2>
+      <p style={{color: 'white', textAlign: 'center'}}>Week of {startDate} - {endDate}</p>
+      <h2 style={{textAlign: 'center', color: '#D0C9B4'}}>Sleep & Mood History for Week.</h2>
       <RowWrap>
         <CircleWrap>
           <Text>Longest Sleep</Text>
-          <CircularProgressbar 
-          styles={buildStyles({
-            // textSize: '7px'
-          })}
-          value={longestSleep} text={`${longestSleep}`} maxValue={12}/>
+            <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
+            <CircularProgressbar 
+            styles={buildStyles({
+              textSize: '25px',
+              textColor: '#191D37',
+              pathColor: '#93875C',
+              trailColor: '#F4F4F6'
+              
+            })}
+            value={longestSleep} text={`${longestSleep}`} maxValue={12}/>
+            </div>
         </CircleWrap>
         <CircleWrap>
           <Text>Shortest Sleep</Text>
-          <CircularProgressbar value={shortestSleep} text={`${shortestSleep}`} maxValue={12}/>
+          <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
+          <CircularProgressbar 
+            styles={buildStyles({
+              textSize: '25px',
+              textColor: '#191D37',
+              pathColor: '#93875C',
+              trailColor: '#F4F4F6'
+              
+            })}
+            value={shortestSleep} text={`${shortestSleep}`} maxValue={12}/>
+          </div>
         </CircleWrap>
       </RowWrap>
       <RowWrap>
         <CircleWrap>
           <Text>Average Mood</Text>
-          <CircularProgressbar value={averageMood} text={`${averageMood}`} maxValue={4}/>
+          <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
+          <CircularProgressbar 
+            styles={buildStyles({
+              textSize: '25px',
+              textColor: '#191D37',
+              pathColor: '#93875C',
+              trailColor: '#F4F4F6'
+              
+              
+            })}
+            value={averageMood} text={`${averageMood}`} maxValue={4}/>
+          </div>
         </CircleWrap>
         <CircleWrap>
           <Text>Average Sleep</Text>
-          <CircularProgressbar value={averageSleep} text={`${averageSleep}`} maxValue={12}/>
+          <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
+          <CircularProgressbar 
+            styles={buildStyles({
+              textSize: '25px',
+              textColor: '#191D37',
+              pathColor: '#93875C',
+              trailColor: '#F4F4F6'
+              
+              
+            })}
+            value={averageSleep} text={`${averageSleep}`} maxValue={12}/>
+          </div>
         </CircleWrap>
       </RowWrap>
-      <RowWrap>
+      <RowWrap style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <h2 style={{color: '#EFE3E1', marginBottom: '0', textAlign: 'center'}}>Recommended Hours<br/> of Sleep Overtime</h2>
         <CircleWrap>
-          <Text style={{marginLeft: '-25px'}}>Recommended Hours</Text>
-          <CircularProgressbar value={recommendedSleep} text={`${recommendedSleep}`} maxValue={12}/>
+          {/* <Text style={{marginLeft: '-35px', whiteSpace:'nowrap', fontSize: '20px', textAlign: 'center'}}>Recommended Hours<br/> <p>of Sleep Overtime</p></Text> */}
+          <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
+          <CircularProgressbar 
+            styles={buildStyles({
+              textSize: '25px',
+              textColor: '#191D37',
+              pathColor: '#93875C',  
+              trailColor: '#F4F4F6'
+            })}
+            value={recommendedSleep} text={`${recommendedSleep}`} maxValue={12}/>
+            </div>
         </CircleWrap>
       </RowWrap>
       <div>
-        <h2 style={{textAlign: 'center', color: 'white', marginTop: '20px', marginBottom: '30px'}}>See additional sleep history by week.</h2>
-        <CalendarWrap>
-          <Calendar style={{borderRadius: '5px'}}
+        <h2 style={{textAlign: 'center', color: '#D0C9B4', marginTop: '20px', marginBottom: '30px'}}>See additional sleep history by week.</h2>
+        <CalendarWrap style={{borderRadius: '8px', border: '5px solid #B07568', width: '350px', margin: '0 auto'}}>
+          <Calendar 
             onChange={handleChange}
             value={date}
             // activeStartDate={date}
-            onClickDay={handleCalendarDateClick}
+            // onClickDay={handleCalendarDateClick}
             selectRange={true}
             // returnValue={'start'}
           />
