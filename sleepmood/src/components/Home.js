@@ -58,7 +58,7 @@ const Home = () => {
     .get('/sleep/all')
     .then(res => {
       let arr = res.data;
-    
+      console.log(arr)
       let storage = {};
       arr.forEach(item => {
         let md = [item.sleepdate[1], item.sleepdate[2]].join(' ');
@@ -73,9 +73,9 @@ const Home = () => {
 
         let hours = getHours(start, finish);
         if (storage[hours]) {
-          storage[hours].push(Math.round((item.sleepmood + item.wakemood + item.avgmood) / 3));
+          storage[hours].push(Math.round((item.sleepmood + item.wakemood + item.daymood) / 3));
         } else {
-          storage[hours] = [Math.round((item.sleepmood + item.wakemood + item.avgmood) / 3)];
+          storage[hours] = [Math.round((item.sleepmood + item.wakemood + item.daymood) / 3)];
         }
       })
 
@@ -83,13 +83,14 @@ const Home = () => {
       for (let key in storage) {
         if (storage[key].length > 1) {
           let avg = storage[key].reduce((acc, val) => {return acc += val}, 0) / storage[key].length;
+          console.log('AVG', avg, 'Hour', key)
           if (avg > max[0]) {
             max[0] = avg;
             max[1] = key;
           }
         }
       }
-
+      console.log(storage)
       setRecommendedSleep(max[1]);
 
       let slice = arr.slice(arr.length - 7);
@@ -126,7 +127,7 @@ const Home = () => {
 
         let hours = getHours(start, finish);
         userHours.push(hours);
-        let moodAvr = (item.sleepmood + item.wakemood + item.avgmood) / 3;
+        let moodAvr = (item.sleepmood + item.wakemood + item.daymood) / 3;
         moods.push(moodAvr);
 
         if (!obj[hours]) {
