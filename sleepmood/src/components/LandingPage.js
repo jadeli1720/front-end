@@ -18,12 +18,12 @@ const Title = styled.h1`
 
 const Intro = styled.p`
     color: #cfd2e8;
+
     font-size: 18px;
     font-weight: bold;
     padding-top: 30px;
     text-align: center;
 `;
-
 
 const LinkContainer = styled.div`
     margin: 0 auto;
@@ -38,6 +38,7 @@ const LinkContainer = styled.div`
         background: #b07568;
         border-radius: 5px;
         color: white;
+
         font-weight: bold;
         margin: 10px;
         padding: 8px 5px;

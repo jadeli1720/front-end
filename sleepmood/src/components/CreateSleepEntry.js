@@ -4,23 +4,38 @@ import { Form } from 'formik';
 
 
 export const CreateSleepEntry = () => {
-    //const {addSleepEntry} = useContext(Context)
-    const [day, setDay] = useState('')
-    const [hours, setHours] = useState('')
+    const {addSleepEntry} = useState('')
+    const [sleepdate, setSleepdate] = useState('')
+    const [wakedate, setWakedate] = useState('')
+    const [sleepmood, setSleepmood] = useState('')
+    const [wakemood, setWakemood] = useState('')
+    const [avgmood, setAvgmood] = useState('')
 
-    const handleDayChange = e => {
-        setDay(e.target.value);
+    const handleSleepdateChange = e => {
+        setSleepdate(e.target.value);
     };
 
-    const handleHoursChange = e => {
-        setHours(e.target.value);
+    const handleWakedateChange = e => {
+        setWakedate(e.target.value);
+    };
+    const handleSleepmoodChange = e => {
+        setSleepmood(e.target.value);
+    };
+    const handleWakemoodChange = e => {
+        setWakemood(e.target.value);
+    };
+    const handleAvgmoodChange = e => {
+        setAvgmood(e.target.value);
     };
 
     const submitSleepEntry = e => {
     e.preventDefault();
-    //addSleepEntry(e, day, hours);
-    setDay('');
-    setHours('');
+    addSleepEntry(e, sleepdate, wakedate, sleepmood, wakemood, avgmood);
+    setSleepdate('');
+    setWakedate('');
+    setSleepmood('');
+    setWakemood('');
+    setAvgmood('');
     };
     
     return (
@@ -28,16 +43,34 @@ export const CreateSleepEntry = () => {
         <Form onSubmit={submitSleepEntry}>
             <h2>Add Sleep Entry</h2>
         <input 
-            onChange={handleDayChange}
-            placeholder = "Day"
-            value={day}
-            name="Day"
+            onChange={handleSleepdateChange}
+            placeholder = "Sleep Date"
+            value={sleepdate}
+            name="SleepDate"
             />
         <input 
-            onChange={handleHoursChange}
-            placeholder = "Hours"
-            value={hours}
-            name="Hours"
+            onChange={handleWakedateChange}
+            placeholder = "Wake Date"
+            value={wakedate}
+            name="Wake Date"
+            />
+            <input 
+            onChange={handleSleepmoodChange}
+            placeholder = "Sleep Mood"
+            value={sleepmood}
+            name="Sleep Mood"
+            />
+            <input 
+            onChange={handleWakemoodChange}
+            placeholder = "Wake Mood"
+            value={wakemood}
+            name="Wake Mood"
+            />
+            <input 
+            onChange={handleAvgmoodChange}
+            placeholder = "Average Mood"
+            value={avgmood}
+            name="Average Mood"
             />
             <button>Add Entry</button> 
         </Form>
