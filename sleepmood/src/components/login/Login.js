@@ -46,7 +46,7 @@ function Login() {
         <FormDiv className="">
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
-                    <legend style={{color: "white"}}>Sign in to sleep mood</legend>
+                    <legend style={{color: "white"}}>Sign in to sleepmood</legend>
                     <label htmlFor="email">Email</label>
                     <input 
                         style={{marginBottom: "15px"}}
