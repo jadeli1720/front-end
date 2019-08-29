@@ -25,6 +25,11 @@ input {
     padding: 10px 0;
 }
 
+.motto {
+    margin-top: 20px;
+    font-size: large;
+}
+
 p, h2 {
     text-align: center;
    color: white

@@ -81,7 +81,7 @@ const SignUp = (props) => {
 
   return (
     <div>
-      <p style={{color: "white"}}>Never waste any time you can spend sleeping.</p>
+      <p className="motto">"Never waste any time<br /> you can spend sleeping."<br />- F. Knight</p>
       <Header>Create your account.</Header>
       <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
         <fieldset>
@@ -137,7 +137,7 @@ const SignUp = (props) => {
           <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
         </fieldset>
       </form>
-      <p style={{ textAlign: "center", color: 'white' }}>Already have an account? <Link to="/login">Sign In.</Link></p>
+      <p>Already have an account? <Link to="/login">Sign In.</Link></p>
     </div>
   )
 }
