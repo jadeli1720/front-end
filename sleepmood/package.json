@@ -8,6 +8,7 @@
     "moment": "^2.24.0",
     "react": "^16.9.0",
     "react-big-calendar": "^0.22.0",
+    "react-calendar": "^2.19.1",
     "react-circular-progressbar": "^2.0.2",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
