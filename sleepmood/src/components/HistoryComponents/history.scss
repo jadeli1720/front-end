@@ -1,0 +1,92 @@
+
+//colors: lightPink-#E3CEC9, darkerPink-#A46456, darkBlue-#191D37
+//#F6F0EE - borders - #EDEBE3
+
+.sc-EHOje.bwFLvo{
+    border-radius: 5px;
+    width: 474px;
+    padding: 0px;
+    // border: 4px #a46456 solid;
+
+}
+
+.rbc-calendar {
+  background: white;
+  color: #191d37;
+  border-radius: 5px 5px 0;
+  border-top: 4px #a46456 solid;
+  border-left: 4px #a46456 solid;
+  border-right: 4px #a46456 solid;
+
+  .rbc-btn-group {
+    display: none;
+    // can bring back to navigate months
+  }
+
+  .rbc-toolbar-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 18px 0 5px;
+  }
+
+  .rbc-month-view {
+    background: white;
+    width: 480px;//may need to check on this anytime we sign in
+    right: 4px;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    border-bottom: 4px #a46456 solid;
+    border-left: 4px #a46456 solid;
+    border-right: 4px #a46456 solid;
+  }
+
+  .rbc-row.rbc-month-header {
+    font-size: 16px;
+    margin: 5px 0;
+
+    .rbc-header {
+        border-color: #f5f4ef;
+    }
+  }
+
+  .rbc-month-row {
+    border-color: #f5f4ef;
+
+    .rbc-day-bg.rbc-off-range-bg {
+      background: white;
+    }
+
+    .rbc-day-bg{
+        border-color: #f5f4ef;
+    }
+
+    .rbc-date-cell.rbc-off-range{
+        color: white;//left over days of the previous and following  months
+    }
+
+    .rbc-date-cell{
+        font-size: 14px;
+        margin-bottom: 5px;
+
+        a{
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .rbc-row-segment{
+        // color: #191d37;
+        display: flex;
+        justify-content: center;
+
+        .rbc-event{
+            background-color: #E3CEC9;
+            border-radius: 25px;
+            color: #191d37;
+            text-align: center;
+            padding: 3px 6px;
+            max-width: 55px;
+        }
+    }
+  }
+}
