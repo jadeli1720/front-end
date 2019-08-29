@@ -38,13 +38,19 @@ const ButtonContainer = styled.div`
 `;
 
 
-const SleepHistory = () => {
+const SleepHistory = (props) => {
+
+  const toSleepEntry = e => {
+    console.log(e)
+    props.history.push(`/CreateSleepEntry/${e.id}`)
+  }
+
 
   return (
     <div>
       <Title>Sleep History By Month</Title>
       <CalenderContainer>
-        <BigCalendar />
+        <BigCalendar clicked={toSleepEntry} />
       </CalenderContainer>
       
       <ButtonContainer>

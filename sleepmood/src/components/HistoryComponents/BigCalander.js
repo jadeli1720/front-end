@@ -12,8 +12,8 @@ const localizer = momentLocalizer(moment);
 
 const BigCalendar = (props) => {
   const [data, setData] = useState([])
-  const [sleepEntry, setSleepEntry] = useState([])
-
+  // const [sleepEntry, setSleepEntry] = useState([])
+  
   //Get dates from server
   const getEvents = () => {
     axiosWithAuth().get(`/sleep/month/${2019}/${7}`)
@@ -38,6 +38,8 @@ const BigCalendar = (props) => {
     return getEvents()
   }, [])
 
+ 
+
   return (
       <div style={{ height: 350 }}>
         <Calendar
@@ -50,9 +52,7 @@ const BigCalendar = (props) => {
           // popup={false}
           popup
           selectable
-          // onShowMore={(events, data) => sleepEntry({ showModal: true, events })}
-          components={{
-          }}
+          onSelectEvent={props.clicked}
         />
         
       </div>

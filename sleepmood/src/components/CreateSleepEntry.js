@@ -1,8 +1,31 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from 'formik';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 // import {Context} from './Context/context'
 
-export const CreateSleepEntry = () => {
+export const CreateSleepEntry = (props) => {
+
+  const toAxios = (id) => {
+    axiosWithAuth()
+      .get(`/sleep/id/${id}`)
+      .then(res => {
+        const sd = res.data;
+        setSleepdate(sd.sleepdate);
+        setWakedate(sd.wakedate);
+        setSleepmood(sd.sleepmood);
+        setWakemood(sd.wakemood);
+        setAvgmood(sd.daymood);
+      })
+      .catch(err => console.log('Oops', err.respond))
+  }
+
+  useEffect(() => {
+    const url = props.match.url;  //  "/CreateSleepEntry"
+    const id = props.location.pathname.replace(`${url}/`, "")
+    if (id !== "") {
+      return toAxios(id);
+    }
+  }, []);
   console.log("here");
   const { addSleepEntry } = useState("");
   const [sleepdate, setSleepdate] = useState("");
@@ -78,7 +101,7 @@ export const CreateSleepEntry = () => {
       </div>
       <div>
         {" "}
-       {/* <SleepEntryList /> */}
+        {/* <SleepEntryList /> */}
       </div>
     </>
   );

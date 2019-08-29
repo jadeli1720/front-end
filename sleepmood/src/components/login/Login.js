@@ -9,7 +9,8 @@ function Login(props) {
     const [user, setUser] = useState({ username: '', password: ''})
 
     const inputChangeHandler = event => {
-        setUser({ ...user, [event.target.name] : [event.target.value] })
+        setUser({ ...user, [event.target.name] : event.target.value })
+        event.target.focus()
     }
 
     const handleSubmit = event => {
@@ -26,7 +27,7 @@ function Login(props) {
             console.log('Successful Login', res)
         })
         .catch(err => {
-          console.log('Opps, Something happened!', err.response)
+          console.log('Oops, Something happened!', err.response)
         }) 
         setUser({
           username: '',
@@ -47,7 +48,8 @@ function Login(props) {
  `
 
     return (
-        <FormDiv className="">
+        // <FormDiv className="">
+        <div>
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
                     <legend style={{color: "white"}}>Sign in to sleepmood</legend>
@@ -77,7 +79,8 @@ function Login(props) {
                 </fieldset>
             </form>
             <p style={{textAlign: "center", color: "white"}}>Forgot Password? <Link to="/login">Click here.</Link></p>
-        </FormDiv>
+        {/* </FormDiv> */}
+        </div>
     )
 }
 

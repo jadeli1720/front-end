@@ -20,7 +20,13 @@ const SignUp = (props) => {
   }
 
   const inputChangeHandler = event => {
-    setUser({ ...user, [event.target.name] : event.target.value })
+    event.preventDefault();
+    setUser({ ...user, [event.target.name]:event.target.value })
+    console.log(
+      "handleChange",
+      event.target.name,
+      event.target.value,
+    );
   }
 
   const handleSubmit = event => {
@@ -68,16 +74,16 @@ const SignUp = (props) => {
     border-radius: 5px;
  `
 
-  const Div = styled.div`
-  margin-bottom: 15px;
- `
+//   const div = styled.div`
+//   margin-bottom: 15px;
+//  `
 
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Create your sleepmood account.</h2>
       <form onSubmit={handleSubmit} className="stacked">
         <fieldset>
-          <Div className="pure-control-group">
+          <div className="pure-control-group">
             <label htmlFor="firstname">First Name</label>
             <input
               type="text"
@@ -85,9 +91,9 @@ const SignUp = (props) => {
               value={user.firstname}
               onChange={inputChangeHandler}
             />
-          </Div>
+          </div>
 
-          <Div className="pure-control-group">
+          <div className="pure-control-group">
             <label htmlFor="lastname">Last Name</label>
             <input
               type="text"
@@ -95,9 +101,9 @@ const SignUp = (props) => {
               value={user.lastname}
               onChange={inputChangeHandler}
             />
-          </Div>
+          </div>
 
-          <Div className="pure-control-group">
+          <div className="pure-control-group">
             <label htmlFor="lastname">Email</label>
             <input
               type="email"
@@ -105,9 +111,9 @@ const SignUp = (props) => {
               value={user.email}
               onChange={inputChangeHandler}
             />
-          </Div>
+          </div>
 
-          <Div className="pure-control-group">
+          <div className="pure-control-group">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -115,9 +121,9 @@ const SignUp = (props) => {
               value={user.password}
               onChange={inputChangeHandler}
             />
-          </Div>
+          </div>
 
-          <Div className="pure-control-group">
+          <div className="pure-control-group">
             <label htmlFor="password">Confirm Password</label>
             <input
               type="password"
@@ -125,7 +131,7 @@ const SignUp = (props) => {
               value={user.password}
               onChange={inputChangeHandler}
             />
-          </Div>
+          </div>
           <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
         </fieldset>
       </form>
