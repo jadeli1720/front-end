@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-svg-icons';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 const Card = styled.div`
   display: flex;
@@ -78,7 +79,11 @@ const SleepEntryForm = () => {
   }
 
   const handleChange = (e) => {
-    setSleepData({[e.target.name]: e.target.value})
+    setSleepData({
+      ...sleepData,
+      [e.target.name]: e.target.value
+    });
+    console.log(e.target.name, ':', e.target.value)
   }
 
   const handleSubmit = () => {
@@ -90,23 +95,41 @@ const SleepEntryForm = () => {
     //   wakemood: '',
     //   daymood: ''
     // }
-    if (sleepData.sleepDate === undefined && sleepData.sleepHour === undefined && 
-        sleepData.sleepMinute === undefined && sleepData.wakeHour === undefined && 
-        sleepData.wakeMinute === undefined && sleepData.wakeDate === undefined) {
+    if (sleepData.sleepDate === undefined || sleepData.sleepHour === undefined || 
+        sleepData.sleepMinute === undefined || sleepData.wakeHour === undefined || 
+        sleepData.wakeMinute === undefined || sleepData.wakeDate === undefined
+        || bedtimeMood === undefined || waketimeMood === undefined || overallDayMood === undefined) {
+      console.log(sleepData.sleepDate, sleepData.sleepHour, sleepData.sleepMinute, sleepData.wakeHour,
+      sleepData.wakeMinute, sleepData.wakeDate)    
       setDisplay('visible');
       setTimeout(() => {
         setDisplay('hidden');
       }, 1000)
     } else {
       // let dateSleep = sleepDate.split('/');
-
+      let sleepYear = sleepData.sleepDate.split('/').reverse()[0];
+      let wakeYear = sleepData.wakeDate.split('/').reverse()[0];
+      console.log('YEAR', sleepYear)
       const newSleepData = {
-        sleepdate: [],
-        wakedate: [],
-        sleepmood: '',
-        wakemood: '',
-        daymood: ''
+        sleepdate: [parseInt(sleepYear), parseInt(sleepData.sleepDate.split('/')[0]), parseInt(sleepData.sleepDate.split('/')[1]),
+                    parseInt(sleepData.sleepHour), parseInt(sleepData.sleepMinute)],
+        wakedate: [parseInt(wakeYear), parseInt(sleepData.wakeDate.split('/')[0]), parseInt(sleepData.wakeDate.split('/')[1]),
+                  parseInt(sleepData.wakeHour), parseInt(sleepData.wakeMinute)],
+        sleepmood: bedtimeMood,
+        wakemood: waketimeMood,
+        daymood: overallDayMood
       }
+
+      console.log('HERE',newSleepData)
+      axiosWithAuth()
+      .post("/sleep/new", newSleepData)
+      .then(res => {
+        let data = res.data;
+        console.log(data)  
+      })
+      .catch(err => {
+        console.log('HERE Opps, Something happened!', err)
+      }) 
     }
   }
 
@@ -124,14 +147,16 @@ const SleepEntryForm = () => {
           <h3>1. Select Bedtime & Mood</h3>
           <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
         
-          <input name="sleephour" 
+          <input name="sleepHour" 
                   style={{width: '50px'}} 
+                  type="text"
                   value={sleepData.sleepHour} 
                   placeholder="00"
                   onChange={handleChange}
           />
-          <input name="sleepminute" 
+          <input name="sleepMinute" 
                   style={{width: '50px'}} 
+                  type="text"
                   value={sleepData.sleepMinute} 
                   placeholder="00"
                   onChange={handleChange}
@@ -141,6 +166,8 @@ const SleepEntryForm = () => {
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <input placeholder="MM/DD/YYYY" 
                    style={{width: '100px', marginBottom: '15px'}}
+                   name="sleepDate"
+                   type="text"
                    value={sleepData.sleepDate}
                    onChange={handleChange}
             />
@@ -156,14 +183,16 @@ const SleepEntryForm = () => {
         <div style={{marginBottom: '30px'}}>
           <h3>2. Select Waketime & Mood</h3>
           <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
-            <input name="wakehour" 
+            <input name="wakeHour" 
                    style={{width: '50px'}} 
+                   type="text"
                    value={sleepData.wakeHour} 
                    placeholder="00"
                    onChange={handleChange}
             />
-            <input name="wakeminutes" 
+            <input name="wakeMinute" 
                    style={{width: '50px'}} 
+                   type="text"
                    value={sleepData.wakeMinute} 
                    placeholder="00"
                    onChange={handleChange}
@@ -172,6 +201,8 @@ const SleepEntryForm = () => {
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <input placeholder="MM/DD/YYYY" 
                    style={{width: '100px', marginBottom: '15px'}}
+                   name="wakeDate"
+                   type="text"
                    value={sleepData.wakeDate}
                    onChange={handleChange}
             />
