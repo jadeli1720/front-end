@@ -49,7 +49,7 @@ function Login(props) {
 
     return (
         // <FormDiv className="">
-        <div>
+        <div className="login-page">
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
                     <legend style={{color: "white"}}>Sign in to sleepmood</legend>
@@ -78,7 +78,7 @@ function Login(props) {
                     </Button>
                 </fieldset>
             </form>
-            <p style={{textAlign: "center", color: "white"}}>Forgot Password? <Link to="/login">Click here.</Link></p>
+            <p style={{textAlign: "center", color: "white"}}>First time user? <Link to="/signup">Register.</Link></p>
         {/* </FormDiv> */}
         </div>
     )
