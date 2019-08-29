@@ -5,17 +5,16 @@ import SleepEntryCard from "./SleepEntryCard";
 
 
 const SleepEntryList = (props) => {
-  const [sleepentrys, setSleepentrys] = useState([])
+  const [sleepentry, setSleepentry] = useState({})
   // const [editing, setEditing] = useState(false);
-  // const [sleepentryToEdit, setSleepentryToEdit] = useState({});
 
-
+//Getting data selected id and filling card with info
    const toAxios = (id) => {
     axiosWithAuth()
       .get(`/sleep/id/${id}`)
       .then(res => {
         const sd = res.data;
-        setSleepentrys(sd)
+        setSleepentry(sd)
         console.log('success',sd)
       })
       .catch(err => console.log('Oops', err.respond))
@@ -29,10 +28,18 @@ const SleepEntryList = (props) => {
     }
   }, []);
 
+  //Edit
+  // const saveEdit = e =>
+  // e.preventDefault();
+  // axiosWithAuth()
+  // .put()
+  // .then(res => console.log('Success'))
+  // .catch(err => console.log('Oops', err.respond))
+
   
   return (
     <div className="card-container">
-      <SleepEntryCard entry={sleepentrys} />
+      <SleepEntryCard entry={sleepentry} />
     </div>
   )
 };
