@@ -1,10 +1,7 @@
 import React from 'react';
-// import { Header, Table } from 'semantic-ui-react';
-import styled from 'styled-components';
+import styled from 'styled-components';import BigCalendar from './BigCalander';
 
-import BigCalendar from './BigCalander';
-
-import 'react-big-calendar/lib/css/react-big-calendar.css';//needs to go in sass
+import 'react-big-calendar/lib/css/react-big-calendar.css';//Gives access to
 import './history.scss';
 
 const CalenderContainer = styled.div`
@@ -12,7 +9,6 @@ const CalenderContainer = styled.div`
     color: white;
     margin: 30px auto;
     padding: 0px 10px;
-    /* width: 460px; */
 `;
 
 const Title = styled.h1`

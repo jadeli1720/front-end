@@ -1,12 +1,14 @@
-// @import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 //colors: lightPink-#E3CEC9, darkerPink-#A46456, darkBlue-#191D37
-//#F6F0EE
+//#F6F0EE - borders - #EDEBE3
 
-// .sc-EHOje.bwFLvo{
-//     width: 474px;
+.sc-EHOje.bwFLvo{
+    border-radius: 5px;
+    width: 474px;
+    padding: 0px;
+    // border: 4px #a46456 solid;
 
-// }
+}
 
 .rbc-calendar {
   background: white;
@@ -18,7 +20,7 @@
 
   .rbc-btn-group {
     display: none;
-    // can bring back for scroll
+    // can bring back to navigate months
   }
 
   .rbc-toolbar-label {
@@ -29,13 +31,13 @@
 
   .rbc-month-view {
     background: white;
-    width: 476px;
-    right: 1px;
+    width: 480px;//may need to check on this anytime we sign in
+    right: 4px;
     border-radius: 0 0 5px 5px;
     border-top: none;
     border-bottom: 4px #a46456 solid;
-    border-left: 3px #a46456 solid;
-    border-right: 3px #a46456 solid;
+    border-left: 4px #a46456 solid;
+    border-right: 4px #a46456 solid;
   }
 
   .rbc-row.rbc-month-header {
@@ -43,15 +45,48 @@
     margin: 5px 0;
 
     .rbc-header {
-        // border: none;//
+        border-color: #f5f4ef;
     }
   }
 
   .rbc-month-row {
-    // border: none;//bottom border seperating rows
+    border-color: #f5f4ef;
 
     .rbc-day-bg.rbc-off-range-bg {
       background: white;
+    }
+
+    .rbc-day-bg{
+        border-color: #f5f4ef;
+    }
+
+    .rbc-date-cell.rbc-off-range{
+        color: white;//left over days of the previous and following  months
+    }
+
+    .rbc-date-cell{
+        font-size: 14px;
+        margin-bottom: 5px;
+
+        a{
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .rbc-row-segment{
+        // color: #191d37;
+        display: flex;
+        justify-content: center;
+
+        .rbc-event{
+            background-color: #E3CEC9;
+            border-radius: 25px;
+            color: #191d37;
+            text-align: center;
+            padding: 3px 6px;
+            max-width: 55px;
+        }
     }
   }
 }

@@ -39,7 +39,7 @@ const BigCalendar = (props) => {
 
  
   return (
-      <div style={{ height: 350 }}>
+      <div style={{ height: 370 }}>
         <Calendar
           localizer={localizer}
           toolbar={true}
