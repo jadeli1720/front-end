@@ -34,7 +34,7 @@ const WhiteSpace = styled.div`
   width: 100%
 `
 
-const SleepEntryForm = () => {
+const SleepEntryForm = (props) => {
 
   const [bedtimeMood, setBedtimeMood] = useState();
   const [bedtimeMoodColor, setBedtimeMoodColor] = useState(['none', 'none', 'none', 'none']);
@@ -126,6 +126,7 @@ const SleepEntryForm = () => {
       .then(res => {
         let data = res.data;
         console.log(data)  
+        props.history.push('/home');
       })
       .catch(err => {
         console.log('HERE Opps, Something happened!', err)
