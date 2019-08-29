@@ -4,6 +4,9 @@ import styled from 'styled-components';
 
 import BigCalendar from './BigCalander';
 
+import 'react-big-calendar/lib/css/react-big-calendar.css';//needs to go in sass
+import './history.scss';
+
 const CalenderContainer = styled.div`
     border-radius:5px;
     color: white;
@@ -16,7 +19,7 @@ const Title = styled.h1`
     color: #edebe3;
     font-family: 'Bitter', serif;
     font-size: 24px;
-    margin: 100px 0 40px;
+    padding: 40px 0 10px;
     text-align: center;
 `;
 
@@ -45,6 +48,7 @@ const SleepHistory = (props) => {
     props.history.push(`/CreateSleepEntry/${e.id}`)
   }
 
+  //does this need to change so that it routes to the sleep entries data where there will be an edit button to then route the edit form?
 
   return (
     <div>

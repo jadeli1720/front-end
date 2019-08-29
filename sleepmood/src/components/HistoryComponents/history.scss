@@ -1,0 +1,57 @@
+// @import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+//colors: lightPink-#E3CEC9, darkerPink-#A46456, darkBlue-#191D37
+//#F6F0EE
+
+// .sc-EHOje.bwFLvo{
+//     width: 474px;
+
+// }
+
+.rbc-calendar {
+  background: white;
+  color: #191d37;
+  border-radius: 5px 5px 0;
+  border-top: 4px #a46456 solid;
+  border-left: 4px #a46456 solid;
+  border-right: 4px #a46456 solid;
+
+  .rbc-btn-group {
+    display: none;
+    // can bring back for scroll
+  }
+
+  .rbc-toolbar-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 18px 0 5px;
+  }
+
+  .rbc-month-view {
+    background: white;
+    width: 476px;
+    right: 1px;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    border-bottom: 4px #a46456 solid;
+    border-left: 3px #a46456 solid;
+    border-right: 3px #a46456 solid;
+  }
+
+  .rbc-row.rbc-month-header {
+    font-size: 16px;
+    margin: 5px 0;
+
+    .rbc-header {
+        // border: none;//
+    }
+  }
+
+  .rbc-month-row {
+    // border: none;//bottom border seperating rows
+
+    .rbc-day-bg.rbc-off-range-bg {
+      background: white;
+    }
+  }
+}
