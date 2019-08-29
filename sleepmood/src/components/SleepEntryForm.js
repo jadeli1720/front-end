@@ -8,8 +8,20 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   // background: #262731;
-  // opacity: 0.6
+  // width: 80%;
+  // margin: 0 auto;
+  // padding-bottom: 20px
+  // opacity: 1
+  z-index: 5;
   
+`
+
+const CardWrap = styled.div`
+  background: #262731;
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 20px
+  opacity: 0.97
 `
 
 const WhiteSpace = styled.div`
@@ -45,65 +57,68 @@ const SleepEntryForm = () => {
 
   const handleClick = () => {
     console.log(bedtimeMood, waketimeMood, overallDayMood)
+
   }
 
   return (
     <div style={{color: '#EFE3E1'}}>
-      <h3 style={{margin: '20px 0 0 20px'}}>Good evening, Charlotte.</h3>
-      <h3 style={{margin: '10px 0 20px 20px'}}>It is 22:30 on .....</h3>
+      <h3 style={{margin: '20px 0 0 47px'}}>Good evening, Charlotte.</h3>
+      <h3 style={{margin: '10px 0 20px 47px'}}>It is 22:30 on .....</h3>
       
-      <Card>
-        <h1>Create sleep entry.</h1>
+      <CardWrap>
+        <Card>
+          <h1 style={{marginBottom: '60px', marginTop: '30px'}}>Create sleep entry.</h1>
 
-        <div style={{marginBottom: '20px'}}>
-          <h3>1. Select Bedtime & Mood</h3>
-          <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
-            <input style={{width: '50px'}}/>
-            <input style={{width: '50px'}}/>
+          <div style={{marginBottom: '30px'}}>
+            <h3>1. Select Bedtime & Mood</h3>
+            <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
+              <input style={{width: '50px'}}/>
+              <input style={{width: '50px'}}/>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <input placeholder="MM/DD/YYYY" style={{width: '100px', marginBottom: '15px'}}/>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
+              <FontAwesomeIcon onClick={() => applyColor(0, 4, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[0]}`,width: '35px', height: '35px', margin: '5px'}} icon={faGrinStars} />
+              <FontAwesomeIcon onClick={() => applyColor(1, 3, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[1]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSmile} />
+              <FontAwesomeIcon onClick={() => applyColor(2, 2, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[2]}`, width: '35px', height: '35px', margin: '5px'}} icon={faMeh} />
+              <FontAwesomeIcon onClick={() => applyColor(3, 1, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[3]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSadTear} />
+            </div>
           </div>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <input placeholder="MM/DD/YYYY" style={{width: '100px', marginBottom: '15px'}}/>
-          </div>
-          <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
-            <FontAwesomeIcon onClick={() => applyColor(0, 4, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[0]}`,width: '35px', height: '35px', margin: '5px'}} icon={faGrinStars} />
-            <FontAwesomeIcon onClick={() => applyColor(1, 3, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[1]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSmile} />
-            <FontAwesomeIcon onClick={() => applyColor(2, 2, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[2]}`, width: '35px', height: '35px', margin: '5px'}} icon={faMeh} />
-            <FontAwesomeIcon onClick={() => applyColor(3, 1, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[3]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSadTear} />
-          </div>
-        </div>
 
-        <div style={{marginBottom: '20px'}}>
-          <h3>2. Select Waketime & Mood</h3>
-          <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
-            <input style={{width: '50px'}}/>
-            <input style={{width: '50px'}}/>
+          <div style={{marginBottom: '30px'}}>
+            <h3>2. Select Waketime & Mood</h3>
+            <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
+              <input style={{width: '50px'}}/>
+              <input style={{width: '50px'}}/>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <input placeholder="MM/DD/YYYY" style={{width: '100px', marginBottom: '15px'}}/>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
+              <FontAwesomeIcon onClick={() => applyColor(0, 4, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[0]}`, width: '35px', height: '35px', margin: '5px'}} icon={faGrinStars} />
+              <FontAwesomeIcon onClick={() => applyColor(1, 3, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[1]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSmile} />
+              <FontAwesomeIcon onClick={() => applyColor(2, 2, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[2]}`, width: '35px', height: '35px', margin: '5px'}} icon={faMeh} />
+              <FontAwesomeIcon onClick={() => applyColor(3, 1, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[3]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSadTear} />
+            </div>
           </div>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-            <input placeholder="MM/DD/YYYY" style={{width: '100px', marginBottom: '15px'}}/>
-          </div>
-          <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
-            <FontAwesomeIcon onClick={() => applyColor(0, 4, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[0]}`, width: '35px', height: '35px', margin: '5px'}} icon={faGrinStars} />
-            <FontAwesomeIcon onClick={() => applyColor(1, 3, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[1]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSmile} />
-            <FontAwesomeIcon onClick={() => applyColor(2, 2, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[2]}`, width: '35px', height: '35px', margin: '5px'}} icon={faMeh} />
-            <FontAwesomeIcon onClick={() => applyColor(3, 1, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[3]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSadTear} />
-          </div>
-        </div>
 
-        <div style={{marginBottom: '20px'}}>
-          <h3>3. Select Overall Mood for Today</h3>
-          <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
-            <FontAwesomeIcon onClick={() => applyColor(0, 4, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[0]}`, width: '35px', height: '35px', margin: '5px'}} icon={faGrinStars} />
-            <FontAwesomeIcon onClick={() => applyColor(1, 3, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[1]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSmile} />
-            <FontAwesomeIcon onClick={() => applyColor(2, 2, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[2]}`, width: '35px', height: '35px', margin: '5px'}} icon={faMeh} />
-            <FontAwesomeIcon onClick={() => applyColor(3, 1, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[3]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSadTear} />
+          <div style={{marginBottom: '20px'}}>
+            <h3>3. Select Overall Mood for Today</h3>
+            <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
+              <FontAwesomeIcon onClick={() => applyColor(0, 4, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[0]}`, width: '35px', height: '35px', margin: '5px'}} icon={faGrinStars} />
+              <FontAwesomeIcon onClick={() => applyColor(1, 3, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[1]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSmile} />
+              <FontAwesomeIcon onClick={() => applyColor(2, 2, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[2]}`, width: '35px', height: '35px', margin: '5px'}} icon={faMeh} />
+              <FontAwesomeIcon onClick={() => applyColor(3, 1, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)} style={{color: `${overallDayMoodColor[3]}`, width: '35px', height: '35px', margin: '5px'}} icon={faSadTear} />
+            </div>
           </div>
-        </div>
 
-        <button onClick={handleClick} style={{color: 'black', marginTop: '40px', width: '160px', 
-                        height:'50px', borderRadius: '8px', fontSize: '18px', 
-                        fontWeight: '600', background: '#ACB2D8'}}>Submit</button>
+          <button onClick={handleClick} style={{color: 'black', marginTop: '40px', width: '160px', 
+                          height:'50px', borderRadius: '8px', fontSize: '18px', 
+                          fontWeight: '600', background: '#ACB2D8'}}>Submit</button>
 
-      </Card>
+        </Card>
+      </CardWrap>
       <WhiteSpace></WhiteSpace>
     </div>
   )
