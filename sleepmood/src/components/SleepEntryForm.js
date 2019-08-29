@@ -44,8 +44,26 @@ const SleepEntryForm = () => {
   const [overallDayMood, setOverallDayMood] = useState();
   const [overallDayMoodColor, setOverallDayMoodColor] = useState(['none', 'none', 'none', 'none']);
 
-  const applyColor = (index, value, colorArr, colorSetter, moodSetter) => {
+  const [display, setDisplay] = useState('hidden');
 
+  // const [sleepHour, setSleepHour] = useState();
+  // const [sleepMinute, setSleepMinute] = useState();
+  // const [sleepDate, setSleepDate] = useState();
+
+  // const [wakeHour, setWakeHour] = useState();
+  // const [wakeMinute, setWakeMinute] = useState();
+  // const [wakeDate, setWakeDate] = useState();
+
+  const [sleepData, setSleepData] = useState({
+    sleepHour: undefined,
+    sleepMinute: undefined,
+    sleepDate: undefined,
+    wakeHour: undefined,
+    wakeMinute: undefined,
+    wakeDate: undefined,
+  })
+
+  const applyColor = (index, value, colorArr, colorSetter, moodSetter) => {
     let newColorArr = colorArr.map((color, i) => {
       if (i === index) {
         return '#AEA37E'
@@ -59,9 +77,37 @@ const SleepEntryForm = () => {
     console.log('moodsetter', bedtimeMood)
   }
 
-  const handleClick = () => {
-    console.log(bedtimeMood, waketimeMood, overallDayMood)
+  const handleChange = (e) => {
+    setSleepData({[e.target.name]: e.target.value})
+  }
 
+  const handleSubmit = () => {
+    console.log(bedtimeMood, waketimeMood, overallDayMood)
+    // const newSleepData = {
+    //   sleepdate: [],
+    //   wakedate: [],
+    //   sleepmood: '',
+    //   wakemood: '',
+    //   daymood: ''
+    // }
+    if (sleepData.sleepDate === undefined && sleepData.sleepHour === undefined && 
+        sleepData.sleepMinute === undefined && sleepData.wakeHour === undefined && 
+        sleepData.wakeMinute === undefined && sleepData.wakeDate === undefined) {
+      setDisplay('visible');
+      setTimeout(() => {
+        setDisplay('hidden');
+      }, 1000)
+    } else {
+      // let dateSleep = sleepDate.split('/');
+
+      const newSleepData = {
+        sleepdate: [],
+        wakedate: [],
+        sleepmood: '',
+        wakemood: '',
+        daymood: ''
+      }
+    }
   }
 
   return (
@@ -77,11 +123,27 @@ const SleepEntryForm = () => {
         <div style={{marginBottom: '30px'}}>
           <h3>1. Select Bedtime & Mood</h3>
           <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
-            <input style={{width: '50px'}}/>
-            <input style={{width: '50px'}}/>
+        
+          <input name="sleephour" 
+                  style={{width: '50px'}} 
+                  value={sleepData.sleepHour} 
+                  placeholder="00"
+                  onChange={handleChange}
+          />
+          <input name="sleepminute" 
+                  style={{width: '50px'}} 
+                  value={sleepData.sleepMinute} 
+                  placeholder="00"
+                  onChange={handleChange}
+          />
+
           </div>
           <div style={{display: 'flex', justifyContent: 'center'}}>
-            <input placeholder="MM/DD/YYYY" style={{width: '100px', marginBottom: '15px'}}/>
+            <input placeholder="MM/DD/YYYY" 
+                   style={{width: '100px', marginBottom: '15px'}}
+                   value={sleepData.sleepDate}
+                   onChange={handleChange}
+            />
           </div>
           <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
             <FontAwesomeIcon onClick={() => applyColor(0, 4, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)} style={{color: `${bedtimeMoodColor[0]}`,width: '35px', height: '35px', margin: '5px', cursor: 'pointer'}} icon={faGrinStars} />
@@ -94,11 +156,25 @@ const SleepEntryForm = () => {
         <div style={{marginBottom: '30px'}}>
           <h3>2. Select Waketime & Mood</h3>
           <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
-            <input style={{width: '50px'}}/>
-            <input style={{width: '50px'}}/>
+            <input name="wakehour" 
+                   style={{width: '50px'}} 
+                   value={sleepData.wakeHour} 
+                   placeholder="00"
+                   onChange={handleChange}
+            />
+            <input name="wakeminutes" 
+                   style={{width: '50px'}} 
+                   value={sleepData.wakeMinute} 
+                   placeholder="00"
+                   onChange={handleChange}
+            />
           </div>
           <div style={{display: 'flex', justifyContent: 'center'}}>
-            <input placeholder="MM/DD/YYYY" style={{width: '100px', marginBottom: '15px'}}/>
+            <input placeholder="MM/DD/YYYY" 
+                   style={{width: '100px', marginBottom: '15px'}}
+                   value={sleepData.wakeDate}
+                   onChange={handleChange}
+            />
           </div>
           <div style={{display: 'flex', justifyContent: 'center', margin: '0 auto'}}>
             <FontAwesomeIcon onClick={() => applyColor(0, 4, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)} style={{color: `${waketimeMoodColor[0]}`, width: '35px', height: '35px', margin: '5px', cursor: 'pointer'}} icon={faGrinStars} />
@@ -118,7 +194,8 @@ const SleepEntryForm = () => {
           </div>
         </div>
 
-        <button onClick={handleClick} style={{color: 'black', marginTop: '40px', width: '160px', 
+        <p style={{color: 'red', visibility: `${display}`}}>Please select all fields.</p>
+        <button onClick={handleSubmit} style={{color: 'black', marginTop: '40px', width: '160px', 
                         height:'50px', borderRadius: '8px', fontSize: '18px', 
                         fontWeight: '600', background: '#ACB2D8'}}>Submit</button>
 
