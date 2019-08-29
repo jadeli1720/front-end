@@ -11,7 +11,8 @@ import Help from './components/Help';
 import Settings from './components/Settings';
 import LandingPage from './components/LandingPage';
 import Login from './components/login/Login';
-import SignUp from './components/login/SignUp'
+import SignUp from './components/login/SignUp';
+import SleepEntryForm from './components/SleepEntryForm';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
       <Route path='/login' component={Login} />
       <Route path="/signup" component={SignUp} />
       <PrivateRoute exact path='/home' component={Home} />
-      <PrivateRoute path="/CreateSleepEntry" component={CreateSleepEntry} />
+      <PrivateRoute path="/CreateSleepEntry" component={SleepEntryForm} />
       <PrivateRoute path='/SleepHistory' component={SleepHistory} />
       <PrivateRoute path='/Help' component={Help} />
       <PrivateRoute path='Settings.js' component={Settings} />
