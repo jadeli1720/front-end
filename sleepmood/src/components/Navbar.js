@@ -54,16 +54,18 @@ const NavBar = () => {
         border-radius: 50%;
         justify-content: center;
         background-color: #ACB2D8;
- 
+        
         .menuIcon {
           font-size: 2rem;
           color: #B98479;
           top: 1.65rem;
           left: .125rem;
-
-          .menuLinks {
-            font-size: 1rem;
-          }
+          /* margin-right: 1rem; */
+          
+        }
+            .menuLinks {
+              font-size: 1rem;
+              /* margin-right: 1rem; */
         }
       }
     }
