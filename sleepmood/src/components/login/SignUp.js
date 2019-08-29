@@ -74,14 +74,19 @@ const SignUp = (props) => {
     border-radius: 5px;
  `
 
+ const Header = styled.h2`
+   text-align: center;
+   color: white
+ `
+
 //   const div = styled.div`
 //   margin-bottom: 15px;
 //  `
 
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>Create your sleepmood account.</h2>
-      <form onSubmit={handleSubmit} className="stacked">
+      <Header>Create your sleepmood account.</Header>
+      <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
         <fieldset>
           <div className="pure-control-group">
             <label htmlFor="firstname">First Name</label>
@@ -127,8 +132,8 @@ const SignUp = (props) => {
             <label htmlFor="password">Confirm Password</label>
             <input
               type="password"
-              name="password"
-              value={user.password}
+              name="confirmpassword"
+              value={user.confirmpassword}
               onChange={inputChangeHandler}
             />
           </div>

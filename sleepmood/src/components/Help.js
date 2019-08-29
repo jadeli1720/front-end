@@ -14,7 +14,6 @@ const Help = () => {
       border: none;
       color: white;
       font-weight: bold;
-      
       padding: 8px 8px;
       text-align: center;
     }
