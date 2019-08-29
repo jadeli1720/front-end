@@ -96,7 +96,7 @@ const NavBar = () => {
       </div>
       <div className='menuDiv'>
         <Menu className='menuBox' compact>
-          <Dropdown icon='user cirle' className='menuIcon'>
+          <Dropdown icon='user' className='menuIcon'>
             <Dropdown.Menu className='menuLinks'>
               <Dropdown.Item as={NavLink} to='/home'>Home</Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/SleepHistory'>Sleep History</Dropdown.Item>

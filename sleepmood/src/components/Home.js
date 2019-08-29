@@ -66,7 +66,7 @@ const Home = () => {
       setRecommendedSleep(recommendedHours);
 
       let week = data.slice(data.length - 7);
-
+      console.log('useeffect week', week)
 
       let xAxis = week.map(item => {
         return item.wakedate[2];
@@ -176,7 +176,7 @@ const Home = () => {
         </CircleWrap>
       </RowWrap>
       <RowWrap style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <h2 style={{color: '#EFE3E1', marginBottom: '0', textAlign: 'center'}}>Recommended Hours<br/> of Sleep Overtime</h2>
+        <h2 style={{color: '#EFE3E1', marginBottom: '0', textAlign: 'center'}}>Recommended Hours<br/> of Sleep Over Time</h2>
         <CircleWrap>
           {/* <Text style={{marginLeft: '-35px', whiteSpace:'nowrap', fontSize: '20px', textAlign: 'center'}}>Recommended Hours<br/> <p>of Sleep Overtime</p></Text> */}
           <div style={{background: '#F4F4F6', borderRadius: '50%'}}>

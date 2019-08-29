@@ -26,7 +26,8 @@ export const CreateSleepEntry = (props) => {
       return toAxios(id);
     }
   }, []);
-  console.log("here");
+
+  
   const { addSleepEntry } = useState("");
   const [sleepdate, setSleepdate] = useState("");
   const [wakedate, setWakedate] = useState("");
