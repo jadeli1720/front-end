@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import 'react-big-calendar/lib/css/react-big-calendar.css';//needs to go in sass
 
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 // import events from './events'//Dummy data
 
 const localizer = momentLocalizer(moment);
 
-//colors: lightPink-#E3CEC9, darkerPink-#A46456, darkBlue-#191D37 
+
 
 const BigCalendar = (props) => {
   const [data, setData] = useState([])
-  const [sleepEntry, setSleepEntry] = useState([])
-
+  // const [sleepEntry, setSleepEntry] = useState([])
+  
   //Get dates from server
   const getEvents = () => {
     axiosWithAuth().get(`/sleep/month/${2019}/${7}`)
@@ -38,8 +37,9 @@ const BigCalendar = (props) => {
     return getEvents()
   }, [])
 
+ 
   return (
-      <div style={{ height: 350 }}>
+      <div style={{ height: 370 }}>
         <Calendar
           localizer={localizer}
           toolbar={true}
@@ -47,12 +47,9 @@ const BigCalendar = (props) => {
           step={30}
           views={['month']}
           defaultDate={new Date(2019, 7, 0)}
-          // popup={false}
           popup
           selectable
-          // onShowMore={(events, data) => sleepEntry({ showModal: true, events })}
-          components={{
-          }}
+          onSelectEvent={props.clicked}
         />
         
       </div>
