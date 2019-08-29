@@ -97,3 +97,11 @@ const getHours = (start, finish) => {
   if (diff > 12) {diff = 12}
   return Math.abs(Math.round(diff));
 }
+
+export {getHours};
+
+export const makeDateFromArray = (arr) => {
+  const newArr = [...arr];
+  newArr[1]--;
+  return new Date(...newArr);
+}
