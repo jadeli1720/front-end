@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { axiosLoginAuth } from '../../utils/axiosWithAuth'
@@ -6,10 +6,10 @@ import './Login.css';
 
 
 function Login(props) {
-    const [user, setUser] = useState({ username: '', password: ''})
+    const [user, setUser] = useState({ username: '', password: '' })
 
     const inputChangeHandler = event => {
-        setUser({ ...user, [event.target.name] : event.target.value })
+        setUser({ ...user, [event.target.name]: event.target.value })
         event.target.focus()
     }
 
@@ -19,20 +19,20 @@ function Login(props) {
 
         //This is the post request that allows connection to backend
         axiosLoginAuth()
-        .post('/login',`grant_type=password&username=${user.username}&password=${user.password}`)
-        .then(res => {
-            localStorage.setItem("token", res.data["access_token"]);
-            localStorage.setItem("tokenType", res.data["token_type"]);
-            props.history.push('/home');
-            console.log('Successful Login', res)
-        })
-        .catch(err => {
-          console.log('Oops, Something happened!', err.response)
-        }) 
+            .post('/login', `grant_type=password&username=${user.username}&password=${user.password}`)
+            .then(res => {
+                localStorage.setItem("token", res.data["access_token"]);
+                localStorage.setItem("tokenType", res.data["token_type"]);
+                props.history.push('/home');
+                console.log('Successful Login', res)
+            })
+            .catch(err => {
+                console.log('Oops, Something happened!', err.response)
+            })
         setUser({
-          username: '',
-          password: ''
-      })
+            username: '',
+            password: ''
+        })
     }
 
     const Button = styled.button`
@@ -42,7 +42,7 @@ function Login(props) {
     border-radius: 5px;
  `
 
- const FormDiv = styled.div`
+    const FormDiv = styled.div`
     background: #232432;
     padding: 10px 0;
  `
@@ -52,27 +52,27 @@ function Login(props) {
         <div className="login-page">
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
-                    <legend style={{color: "white"}}>Sign in to sleepmood</legend>
+                    <legend style={{ color: "white" }}>Sign in to sleepmood</legend>
                     <label htmlFor="email">Email</label>
-                    <input 
-                        style={{marginBottom: "15px"}}
-                        type="text" 
+                    <input
+                        style={{ marginBottom: "15px" }}
+                        type="text"
                         name="username"
                         placeholder="Username"
                         onChange={inputChangeHandler}
                         value={user.username}
                     />
                     <label htmlFor="password">Password</label>
-                    <input 
-                        style={{marginBottom: "15px"}}
+                    <input
+                        style={{ marginBottom: "15px" }}
                         className="input-class"
-                        type="password" 
+                        type="password"
                         name="password"
                         onChange={inputChangeHandler}
                         value={user.password}
                     />
-                    <Button 
-                        type="submit" 
+                    <Button
+                        type="submit"
                         className="pure-button pure-button-primary">
                         Sign in
                     </Button>
