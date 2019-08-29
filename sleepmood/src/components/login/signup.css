@@ -25,3 +25,8 @@ input {
     padding: 10px 0;
 }
 
+p, h2 {
+    text-align: center;
+   color: white
+}
+

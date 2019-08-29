@@ -79,13 +79,10 @@ const SignUp = (props) => {
    color: white
  `
 
-//   const div = styled.div`
-//   margin-bottom: 15px;
-//  `
-
   return (
     <div>
-      <Header>Create your sleepmood account.</Header>
+      <p style={{color: "white"}}>Never waste any time you can spend sleeping.</p>
+      <Header>Create your account.</Header>
       <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
         <fieldset>
           <div className="pure-control-group">
