@@ -60,12 +60,11 @@ const NavBar = () => {
           color: #B98479;
           top: 1.65rem;
           left: .125rem;
-          /* margin-right: 1rem; */
-          
-        }
-            .menuLinks {
+          .menuLinks {
               font-size: 1rem;
-              /* margin-right: 1rem; */
+              right: -4rem;
+              left: auto;
+          }
         }
       }
     }
