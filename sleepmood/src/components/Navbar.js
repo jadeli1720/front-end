@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dropdown, Menu, Icon } from 'semantic-ui-react'
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from 'styled-components'
 
 const NavBar = () => {
@@ -54,15 +54,16 @@ const NavBar = () => {
         border-radius: 50%;
         justify-content: center;
         background-color: #ACB2D8;
- 
+        
         .menuIcon {
           font-size: 2rem;
           color: #B98479;
           top: 1.65rem;
           left: .125rem;
-
           .menuLinks {
-            font-size: 1rem;
+              font-size: 1rem;
+              right: -4rem;
+              left: auto;
           }
         }
       }
@@ -74,6 +75,16 @@ const NavBar = () => {
   }
   `;
 
+  const toMarketing = e => {
+    e.preventDefault()
+    window.open('https://sleepmood.netlify.com', '_blank')
+  }
+
+  const toSignOut = e => {
+    console.log('signout')
+    localStorage.removeItem('token')
+    localStorage.removeItem('tokenType')
+  }
 
   return (
     <HeaderWrapper>
@@ -91,7 +102,8 @@ const NavBar = () => {
               <Dropdown.Item as={NavLink} to='/CreateSleepEntry'>Create Sleep Entry</Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/Settings'>Settings</Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/Help'>Help</Dropdown.Item>
-              <Dropdown.Item as={NavLink} to='/'>Sign out</Dropdown.Item>
+              <Dropdown.Item as={Link} onClick={toMarketing}>Sleepmood</Dropdown.Item>
+              <Dropdown.Item as={NavLink} to='/' onClick={toSignOut}>Sign out</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Menu>
