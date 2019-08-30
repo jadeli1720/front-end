@@ -38,7 +38,6 @@ const LinkContainer = styled.div`
         background: #b07568;
         border-radius: 5px;
         color: white;
-
         font-weight: bold;
         margin: 10px;
         padding: 8px 5px;

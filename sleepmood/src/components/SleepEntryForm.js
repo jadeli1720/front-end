@@ -10,7 +10,7 @@ const Card = styled.div`
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  padding-bottom: 20px
+  padding-bottom: 20px;
   z-index: 5;
   position: relative;
   

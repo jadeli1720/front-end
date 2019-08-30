@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Bitter|Roboto&display=swap");
 
 .App {
-  background-color: #191D37 ;
-  background-image: url('https://i.imgur.com/QHWwH4G.png');
+  background-color: #191d37;
+  background-image: url("https://i.imgur.com/QHWwH4G.png");
   background-repeat: no-repeat;
   background-origin: border-box;
   background-attachment: fixed;
   background-size: auto;
-  font-family: 'Roboto', serif;
-  padding:30px 0;
+  font-family: "Roboto", serif;
+  padding: 30px 0;
   margin: 0 auto;
   max-width: 500px;
   width: 100%;
@@ -20,11 +20,10 @@
   width: 350px;
   max-width: 100%;
   background: white;
-  border: 5px solid #B07568;
+  border: 5px solid #b07568;
   border-radius: 3px;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
-
 }
 
 .react-calendar__tile--active {
@@ -58,12 +57,82 @@ label {
   color: #efe3e1;
 }
 
-.card-container{
+/* SleepEntryCard */
+.card-container {
   margin: 0 auto;
   display: flex;
   justify-content: center;
 }
 
-.SleepEntryCard{
+.SleepEntryCard {
   color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 30px;
+}
+
+.card-title {
+  color: #edebe3;
+  font-family: "Bitter", serif;
+  margin-bottom: 30px;
+}
+
+.bed-and-sleep {
+  background-color: #191d37;
+  padding: 35px;
+}
+
+/* Top of card */
+.top-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-margin {
+  margin: 40px 0;
+}
+
+.emojis {
+  margin-left: 30px;
+  margin-top: 2px;
+}
+
+/* Bottom of card */
+.circle-container {
+  margin: 20px auto;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+}
+
+.card-links {
+  margin: 10px auto;
+}
+
+.card-edit {
+  background: #93875c;
+  border: none;
+  border-radius: 5px;
+  color: #191d37;
+  font-weight: bold;
+  margin: 10px;
+  padding: 8px 5px;
+  text-align: center;
+  width: 140px;
+}
+
+.card-delete {
+  background: #dadbe2;
+  border: none;
+  border-radius: 5px;
+  color: #191d37;
+  font-weight: bold;
+  margin: 10px;
+  padding: 8px 5px;
+  text-align: center;
+  width: 140px;
 }

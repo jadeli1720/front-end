@@ -65,6 +65,11 @@ const SignUp = (props) => {
 
   }
 
+  const Quote = styled.p`
+    color: white;
+
+  `;
+
   const Button = styled.button`
     color: black;
     background: #f3f3f3;
@@ -85,6 +90,7 @@ const SignUp = (props) => {
 
   return (
     <div>
+    <p>'Never waste any time you can spend sleeping.'</p>
       <Header>Create your sleepmood account.</Header>
       <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
         <fieldset>
