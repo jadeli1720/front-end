@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { makeFinishedDiv, wait } from '../helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-svg-icons';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
@@ -34,7 +35,7 @@ const WhiteSpace = styled.div`
   width: 100%
 `
 
-const SleepEntryForm = () => {
+const SleepEntryForm = props => {
 
   const [bedtimeMood, setBedtimeMood] = useState();
   const [bedtimeMoodColor, setBedtimeMoodColor] = useState(['none', 'none', 'none', 'none']);
@@ -56,6 +57,7 @@ const SleepEntryForm = () => {
   // const [wakeDate, setWakeDate] = useState();
 
   const [sleepData, setSleepData] = useState({
+    id: undefined,
     sleepHour: undefined,
     sleepMinute: undefined,
     sleepDate: undefined,
@@ -63,6 +65,14 @@ const SleepEntryForm = () => {
     wakeMinute: undefined,
     wakeDate: undefined,
   })
+
+  useEffect(() => {
+    const url = props.match.url;  // navigate here
+    const id = props.location.pathname.replace(`${url}/update/`, "")
+    if (id !== "") {
+      return axiosGet(id);
+    }
+  }, [])
 
   const applyColor = (index, value, colorArr, colorSetter, moodSetter) => {
     let newColorArr = colorArr.map((color, i) => {
@@ -84,6 +94,53 @@ const SleepEntryForm = () => {
       [e.target.name]: e.target.value
     });
     console.log(e.target.name, ':', e.target.value)
+  }
+
+  const axiosGet = (id) => {
+    axiosWithAuth()
+      .get(`/sleep/id/${id}`)
+      .then(res => {
+        const sd = res.data;
+        setSleepData({
+          id: sd.id,
+          sleepHour: sd.sleepdate[3],
+          sleepMinute: sd.sleepdate[4].length === 1 ? `0${sd.sleepdate[4]}` : sd.sleepdate[4],
+          sleepDate: `${sd.sleepdate[1]}/${sd.sleepdate[2]}/${sd.sleepdate[0]}`,
+          wakeHour: sd.wakedate[3],
+          wakeMinute: sd.wakedate[4].length === 1 ? `0${sd.wakedate[4]}` : sd.wakedate[4],
+          wakeDate: `${sd.wakedate[1]}/${sd.wakedate[2]}/${sd.wakedate[0]}`,
+        })
+        console.log('success',sd)
+      })
+      .catch(err => console.log('Oops', err.respond))
+  }
+
+  const axiosPost = (newSleepData) => {
+    axiosWithAuth()
+      .post("/sleep/new", newSleepData)
+      .then(res => {
+        console.log(res.data)
+        const arr = makeFinishedDiv("The Sleep Entry\nhas been added.")
+        wait(2).then(() => arr[1].remove())
+        wait(1.5).then(() => props.history.push("/home"))
+      })
+      .catch(err => {
+        console.log('HERE Opps, Something happened!', err)
+      })
+  }
+
+  const axiosPut = (newSleepData) => {
+    axiosWithAuth()
+      .put(`/sleep/update/${newSleepData.id}`, newSleepData)
+      .then(res => {
+        console.log(res.data)
+        const arr = makeFinishedDiv("The Sleep Entry\nhas been updated.")
+        wait(2).then(() => arr[1].remove())
+        wait(1.5).then(() => props.history.push("/home"))
+      })
+      .catch(err => {
+        console.log('HERE Oops, Something happened!', err)
+      })
   }
 
   const handleSubmit = () => {
@@ -121,15 +178,11 @@ const SleepEntryForm = () => {
       }
 
       console.log('HERE',newSleepData)
-      axiosWithAuth()
-      .post("/sleep/new", newSleepData)
-      .then(res => {
-        let data = res.data;
-        console.log(data)  
-      })
-      .catch(err => {
-        console.log('HERE Opps, Something happened!', err)
-      }) 
+      if (sleepData.id) {
+        axiosPut(newSleepData)
+      } else {
+        axiosPost(newSleepData);
+      }
     }
   }
 
@@ -228,7 +281,7 @@ const SleepEntryForm = () => {
         <p style={{color: 'red', visibility: `${display}`}}>Please select all fields.</p>
         <button onClick={handleSubmit} style={{color: 'black', marginTop: '40px', width: '160px', 
                         height:'50px', borderRadius: '8px', fontSize: '18px', 
-                        fontWeight: '600', background: '#ACB2D8'}}>Submit</button>
+                        fontWeight: '600', background: '#ACB2D8'}}>{sleepData.id ? "Edit" : "Submit"}</button>
 
       </Card>
 

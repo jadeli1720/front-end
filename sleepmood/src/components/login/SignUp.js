@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { axiosLoginAuth } from '../../utils/axiosWithAuth';
 import { Link } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import Warning from './Warning';
 import './signup.css';
@@ -12,16 +13,16 @@ const SignUp = (props) => {
   const [user, setUser] = useState({ firstname: '', lastname: '', email: '', password: '', confirmpassword: '' })
 
   const handleConfirm = () => {
-    const {password, confirmpassword} = user;
+    const { password, confirmpassword } = user;
     // perform all neccessary validations
     if (password !== confirmpassword) {
-      return 
-    } 
+      return
+    }
   }
 
   const inputChangeHandler = event => {
     event.preventDefault();
-    setUser({ ...user, [event.target.name]:event.target.value })
+    setUser({ ...user, [event.target.name]: event.target.value })
     console.log(
       "handleChange",
       event.target.name,
@@ -32,14 +33,8 @@ const SignUp = (props) => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // handleConfirm()
-    // Warning/Error Popup
-
-    console.log(user);
-    //  This is the post request that allows connection to backend
     axios.post("https://sleep-mood-db.herokuapp.com/createnewuser", user)
       .then(res => {
-        // props.history.push('/login');
         if (res.status === 201) {
           axiosLoginAuth()
             .post('/login', `grant_type=password&username=${user.email}&password=${user.password}`)
@@ -61,17 +56,48 @@ const SignUp = (props) => {
     setUser({
       firstname: "", lastname: "", email: "", password: ""
     })
-    //{firstname: "l", lastname: "j", email: "j@g.c", password: "pw"}
-
   }
 
-  const Quote = styled.p`
-    color: white;
+  const QuoteBlock = styled.div`
+    margin: 15px 40px 10px;
+    padding-top: 40px;
 
+    .quote{
+      color: #edebe3;
+      font-family: 'Bitter', serif;
+      font-size: 24px;
+      line-height: 40px;
+    }
+
+    p{
+      color: #edebe3;
+      font-family: 'Bitter', serif;
+      font-size: 24px;
+    }
   `;
 
+  const IconContainer = styled.div`
+    color: #979ECD;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    height: 50px;
+    .landing-cloud1 {
+        font-size: 6rem;
+        position: relative;
+        top: -3rem;
+        right: 4rem;
+    }
+    .landing-cloud2 {
+        font-size: 4rem;
+        position: relative;
+        top: -.5rem;
+        right: 9rem;
+    }
+`;
+
   const Button = styled.button`
-    color: black;
+    color: #191d37;
     background: #f3f3f3;
     width: 100%;
     background: #b07568;
@@ -79,19 +105,24 @@ const SignUp = (props) => {
     border-radius: 5px;
  `
 
- const Header = styled.h2`
+  const Header = styled.h2`
    text-align: center;
-   color: white
+   color: white;
+   font-family: 'Bitter', serif;
+   font-size:28px;
  `
-
-//   const div = styled.div`
-//   margin-bottom: 15px;
-//  `
 
   return (
     <div>
-    <p>'Never waste any time you can spend sleeping.'</p>
-      <Header>Create your sleepmood account.</Header>
+      <QuoteBlock>
+        <p className="quote">"Never waste any time you can spend sleeping."</p>
+        <p>-F. Knight</p>
+      </QuoteBlock>
+      <IconContainer>
+        <Icon name="cloud" className='landing-cloud1' />
+        <Icon name="cloud" className='landing-cloud2' />
+      </IconContainer>
+      <Header>Create your account.</Header>
       <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
         <fieldset>
           <div className="pure-control-group">
@@ -146,7 +177,7 @@ const SignUp = (props) => {
           <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
         </fieldset>
       </form>
-      <p style={{ textAlign: "center", color: 'white' }}>Already have an account? <Link to="/login">Sign In.</Link></p>
+      <p className="login-link">Already have an account? <Link to="/login">Sign In</Link></p>
     </div>
   )
 }

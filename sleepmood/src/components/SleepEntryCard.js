@@ -1,6 +1,6 @@
 import React from 'react';
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Link } from 'react-router-dom';
+import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { makeDateFromArray, getHours, makeFinishedDiv, wait } from '../helpers';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ const Text = styled.p`
   color: #EFE3E1
 `
 
-const SleepEntryCard = ({entry, toHome}) => {
+const SleepEntryCard = ({entry, toHome, toEditForm}) => {
 // Boom Awesome!!
 
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -56,21 +56,18 @@ const SleepEntryCard = ({entry, toHome}) => {
   const averageMood = Math.round(entry.sleepmood + entry.wakemood + entry.daymood) / 3;
 
 
-  const toEditForm = e => {
-    e.preventDefault();
-  }
+  
 
   function toDelete(e) {
     e.preventDefault();
-    // axiosWithAuth()
-    //   .delete(`/sleep/delete/${entry.id}`)
-    //   .then(res => {
+    axiosWithAuth()
+      .delete(`/sleep/delete/${entry.id}`)
+      .then(res => {
         const arr = makeFinishedDiv("The Sleep Entry\nhas been deleted.")
         wait(2).then(() => arr[1].remove())
         wait(1.5).then(() => toHome())
-        
-      // })
-      // .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
   }
 
   return (
@@ -128,7 +125,7 @@ const SleepEntryCard = ({entry, toHome}) => {
 
       <div className="button-container">
         <Link to={`/SleepEntryForm/${entry.id}`} className="card-links">
-          <button type="button" onClick={toEditForm} className="card-edit" >Edit</button>
+          <button type="button" onClick={() => toEditForm(entry)} className="card-edit" >Edit</button>
         </Link>
         <Link to={`/CreateSleepEntry/${entry.id}`} className="card-links">
           <button type="button" onClick={toDelete} className="card-delete" >Delete</button>

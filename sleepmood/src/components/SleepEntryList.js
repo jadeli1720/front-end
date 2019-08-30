@@ -24,6 +24,10 @@ const SleepEntryList = (props) => {
     props.history.push("/home")
   }
 
+  const toEditForm = e => {
+    props.history.push(`/CreateSleepEntry/update/${e.id}`)
+  }
+
   useEffect(() => {
     const url = props.match.url;  // navigate here
     const id = props.location.pathname.replace(`${url}/`, "")
@@ -43,7 +47,7 @@ const SleepEntryList = (props) => {
   
   return (
     <div className="card-container">
-      <SleepEntryCard entry={sleepentry} toHome={toHome} />
+      <SleepEntryCard entry={sleepentry} toHome={toHome} toEditForm={toEditForm} />
     </div>
   )
 };
