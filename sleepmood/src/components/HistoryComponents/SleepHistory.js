@@ -44,7 +44,6 @@ const SleepHistory = (props) => {
     props.history.push(`/SleepEntryList/${e.id}`)
   }
 
-  //does this need to change so that it routes to the sleep entries data where there will be an edit button to then route the edit form?
 
   return (
     <div>
@@ -54,7 +53,7 @@ const SleepHistory = (props) => {
       </CalenderContainer>
       
       <ButtonContainer>
-        <button>See More</button>
+        <button>Back</button>
       </ButtonContainer>
 
     </div>
