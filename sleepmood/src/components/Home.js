@@ -95,7 +95,9 @@ const Home = () => {
   const handleCalendarDateClick = () => {
     console.log('HERE click', date)
   }
-  const arr = monthArray;
+  console.log("month Array", monthArray)
+  const arr = monthArray || ["0"];
+  console.log("arr",arr)
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
       <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
