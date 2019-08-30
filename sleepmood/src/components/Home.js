@@ -55,6 +55,7 @@ const Home = () => {
   const [averageSleep, setAverageSleep] = useState('');
   const [recommendedSleep, setRecommendedSleep] = useState('');
   const [monthArray, setMonthArray] = useState([]);
+  const [arr, setArr] = useState(monthArray);
 
   useEffect(() => {
     
@@ -96,7 +97,7 @@ const Home = () => {
     console.log('HERE click', date)
   }
 
-  const arr = monthArray;
+  // const arr = monthArray;
 
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
@@ -104,8 +105,8 @@ const Home = () => {
       <div>
         <XYPlot height={300} width={470} xType="ordinal">
           <XAxis tickValues={xAxisValues} tickFormat={v =>  
-          { let m = arr[0];
-            arr.shift();
+          { let m = monthArray[0];
+            monthArray.shift();
             return  `${m.toString()} / ${v * 1}`}} style={{
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
@@ -196,6 +197,7 @@ const Home = () => {
             onChange={handleChange}
             value={date}
             selectRange={true}
+            onClickDay={(e) => e.preventDefault()}
           />
         </CalendarWrap>
         <WhiteSpace></WhiteSpace>
