@@ -17,11 +17,11 @@ const RowWrap = styled.div`
   justify-content: center;
 `
 const Text = styled.p`
-  text-align: center;
-  font-size: 16px;
+  margin-left: -50px; 
+  font-size: 24px;
   font-weight: 600;
   white-space:nowrap;
-  color: #EFE3E1
+  color: #d0c9b4
 `
 
 const SleepEntryCard = ({entry, toHome}) => {

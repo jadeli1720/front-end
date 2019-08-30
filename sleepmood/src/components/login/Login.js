@@ -37,6 +37,8 @@ function Login(props) {
     }
 
     const QuoteBlock = styled.div`
+        display: flex;
+        justify-content: flex-end;
         margin: 15px 40px 10px;
         padding-top: 40px;
 
@@ -63,13 +65,13 @@ function Login(props) {
     .landing-cloud1 {
         font-size: 6rem;
         position: relative;
-        top: -3rem;
+        top: -5rem;
         left: 4rem;
     }
     .landing-cloud2 {
         font-size: 4rem;
         position: relative;
-        top: -.5rem;
+        top: -2rem;
         left: 9rem;
     }
 `;
