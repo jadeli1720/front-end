@@ -132,8 +132,7 @@ const SleepEntryCard = ({entry, toHome}) => {
                   pathColor: '#93875C',
                   trailColor: '#F4F4F6'
                 })}
-                value={averageMood} text={<FontAwesomeIcon style={{ color: '#AEA37E', width: '24px', height: '24px' }}
-                  icon={emojis[averageMood - 1]} />} maxValue={4}
+                value={averageMood} text={averageMood} maxValue={4}
               />
             </div>
           </CircleWrap>

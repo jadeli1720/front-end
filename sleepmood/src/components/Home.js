@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
-import  { HorizontalGridLines,
+import  { 
   VerticalBarSeries,
   XAxis,
   YAxis,
-  XYPlot, LineSeries } from 'react-vis';
+  XYPlot } from 'react-vis';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
@@ -95,7 +95,9 @@ const Home = () => {
   const handleCalendarDateClick = () => {
     console.log('HERE click', date)
   }
+
   const arr = monthArray;
+
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
       <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
@@ -104,21 +106,17 @@ const Home = () => {
           <XAxis tickValues={xAxisValues} tickFormat={v =>  
           { let m = arr[0];
             arr.shift();
-            return  `${m.toString()}/ ${v * 1}`}} style={{
-            // line: {stroke: '#F5F4EF', width: '4px'},
-            // ticks: {stroke: 'blue', strokeWidth: '4px'},
+            return  `${m.toString()} / ${v * 1}`}} style={{
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
           <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} tickTotal={12} style={{
-            // line: {stroke: '#F5F4EF', width: '4px'},
-            // ticks: {stroke: 'blue', strokeWidth: '4px'},
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
-          <HorizontalGridLines style={{backgroundColor: 'blue'}}/>
-          <VerticalBarSeries data={graphData} style={{fill: '#4A549C', stroke: '#93875C', strokeWidth: 2}}/>
+          {/* <HorizontalGridLines style={{backgroundColor: 'blue'}}/> */}
+          <VerticalBarSeries data={graphData} style={{fill: '#4A549C', stroke: '#93875C', strokeWidth: 2}} opacity={0.8}/>
         </XYPlot>
       </div>
-      <p style={{color: 'white', textAlign: 'center'}}>Week of {startDate} - {endDate}</p>
+      <p style={{color: '#EFE3E1', textAlign: 'center', fontSize: '16px', fontWeight: '600', marginTop: '15px'}}>Week of {monthNames[monthArray[0] - 1]} {startDate.split('/')[1]} to {monthNames[monthArray[monthArray.length - 1] - 1]} {endDate.split('/')[1]}</p>
       <h2 style={{textAlign: 'center', color: '#D0C9B4'}}>Sleep & Mood History for Week.</h2>
       <RowWrap>
         <CircleWrap>
@@ -129,8 +127,7 @@ const Home = () => {
               textSize: '25px',
               textColor: '#191D37',
               pathColor: '#93875C',
-              trailColor: '#F4F4F6'
-              
+              trailColor: '#F4F4F6' 
             })}
             value={longestSleep} text={`${longestSleep}`} maxValue={12}/>
             </div>
@@ -143,8 +140,7 @@ const Home = () => {
               textSize: '25px',
               textColor: '#191D37',
               pathColor: '#93875C',
-              trailColor: '#F4F4F6'
-              
+              trailColor: '#F4F4F6' 
             })}
             value={shortestSleep} text={`${shortestSleep}`} maxValue={12}/>
           </div>
@@ -160,8 +156,6 @@ const Home = () => {
               textColor: '#191D37',
               pathColor: '#93875C',
               trailColor: '#F4F4F6'
-              
-              
             })}
             value={averageMood} text={`${averageMood}`} maxValue={4}/>
           </div>
@@ -175,8 +169,6 @@ const Home = () => {
               textColor: '#191D37',
               pathColor: '#93875C',
               trailColor: '#F4F4F6'
-              
-              
             })}
             value={averageSleep} text={`${averageSleep}`} maxValue={12}/>
           </div>
@@ -185,7 +177,6 @@ const Home = () => {
       <RowWrap style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <h2 style={{color: '#EFE3E1', marginBottom: '0', textAlign: 'center'}}>Recommended Hours<br/> of Sleep Over Time</h2>
         <CircleWrap>
-          {/* <Text style={{marginLeft: '-35px', whiteSpace:'nowrap', fontSize: '20px', textAlign: 'center'}}>Recommended Hours<br/> <p>of Sleep Overtime</p></Text> */}
           <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
           <CircularProgressbar 
             styles={buildStyles({
@@ -204,10 +195,7 @@ const Home = () => {
           <Calendar 
             onChange={handleChange}
             value={date}
-            // activeStartDate={date}
-            // onClickDay={handleCalendarDateClick}
             selectRange={true}
-            // returnValue={'start'}
           />
         </CalendarWrap>
         <WhiteSpace></WhiteSpace>
