@@ -9,20 +9,30 @@ import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-
 import 'react-circular-progressbar/dist/styles.css';
 
 const CircleWrap = styled.div`
-  width: 20%; 
-  margin: 30px auto;
-`
-const RowWrap = styled.div`
-  display: flex;
-  justify-content: center;
-`
-const Text = styled.p`
-  margin-left: -50px; 
+  width: 30%; 
+  margin: 40px auto;
+`;
+
+const Total = styled.p`
+  position: relative;
+  right: 4rem;
+  text-align:center;
   font-size: 24px;
   font-weight: 600;
   white-space:nowrap;
   color: #d0c9b4
-`
+`;
+
+const Average = styled.p`
+  position: relative;
+  right: 2.5rem;
+  text-align:center;
+  font-size: 24px;
+  font-weight: 600;
+  white-space:nowrap;
+  color: #d0c9b4
+`;
+
 
 const SleepEntryCard = ({entry, toHome}) => {
 // Boom Awesome!!
@@ -98,10 +108,22 @@ const SleepEntryCard = ({entry, toHome}) => {
         </div>
 
         <div className='circle-container'>
-
-          <h2>Total hours in bed</h2>
           <CircleWrap>
-            <Text>Average Mood</Text>
+            <Total>Total hours in bed</Total>
+            <div style={{ background: '#F4F4F6', borderRadius: '50%' }}>
+              <CircularProgressbar
+                styles={buildStyles({
+                  textSize: '25px',
+                  textColor: '#191D37',
+                  pathColor: '#93875C',
+                  trailColor: '#F4F4F6'
+                })}
+                value={totalHoursSlept} text={totalHoursSlept} maxValue={4}
+              />
+            </div>
+          </CircleWrap>
+          <CircleWrap>
+            <Average>Average Mood</Average>
             <div style={{ background: '#F4F4F6', borderRadius: '50%' }}>
               <CircularProgressbar
                 styles={buildStyles({
