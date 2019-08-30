@@ -211,7 +211,7 @@ const SleepEntryForm = props => {
   }
 
   return (
-    <div style={{color: '#EFE3E1'}}>
+    <div style={{color: '#EFE3E1'}} className="sleep-entry-form">
       <h3 style={{margin: '20px 0 0 47px'}}>Good evening, Charlotte.</h3>
       <h3 style={{margin: '10px 0 20px 47px'}}>{""}</h3>
       
