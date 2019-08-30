@@ -37,8 +37,8 @@ function Login(props) {
     }
 
     const QuoteBlock = styled.div`
-    margin: 15px 40px 10px;
-    padding-top: 40px;
+        margin: 15px 40px 10px;
+        padding-top: 40px;
 
     .quote{
       color: #edebe3;
@@ -55,49 +55,55 @@ function Login(props) {
   `;
 
     const IconContainer = styled.div`
-    color: #979ECD;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    height: 50px;
+        color: #979ECD;
+        display: flex;
+        align-content: flex-start;
+        flex-direction: column;
+        height: 50px;
     .landing-cloud1 {
         font-size: 6rem;
         position: relative;
         top: -3rem;
-        right: 4rem;
+        left: 4rem;
     }
     .landing-cloud2 {
         font-size: 4rem;
         position: relative;
         top: -.5rem;
-        right: 9rem;
+        left: 9rem;
     }
 `;
 
-const Header = styled.h2`
-text-align: center;
-color: white;
-font-family: 'Bitter', serif;
-font-size:28px;
-`
+    const Header = styled.h2`
+        text-align: center;
+        color: white;
+        font-family: 'Bitter', serif;
+        font-size:28px;
+        margin: 40px 0 30px;
+    `
 
 
     const Button = styled.button`
-    width: 100%;
-    background: #d0c9b4;
-    color: #232432;
-    border-radius: 5px;
- `
+        width: 100%;
+        background: #d0c9b4;
+        color: #232432;
+        border-radius: 5px;
+        font-weight: bold;
+ `;
+    
 
     return (
         <div className="login-page">
-            <QuoteBlock>
-                <p className="quote">Good evening, <br></br> welcome back.</p>
-            </QuoteBlock>
-            <IconContainer>
-                <Icon name="cloud" className='landing-cloud1' />
-                <Icon name="cloud" className='landing-cloud2' />
-            </IconContainer>
+            <div>
+                <QuoteBlock>
+                    <p className="quote">Good evening, <br></br> welcome back.</p>
+                </QuoteBlock>
+                <IconContainer>
+                    <Icon name="cloud" className='landing-cloud1' />
+                    <Icon name="cloud" className='landing-cloud2' />
+                </IconContainer>
+            </div>
+
             <Header>Sign in to sleepmood</Header>
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>

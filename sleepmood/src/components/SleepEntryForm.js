@@ -48,6 +48,7 @@ const SleepEntryForm = props => {
   const [overallDayMoodColor, setOverallDayMoodColor] = useState(['none', 'none', 'none', 'none']);
 
   const [display, setDisplay] = useState('hidden');
+  const [errorMessage, setErrorMessage] = useState("Please select all fields.");
 
   // const [sleepHour, setSleepHour] = useState();
   // const [sleepMinute, setSleepMinute] = useState();
@@ -162,12 +163,21 @@ const SleepEntryForm = props => {
         || bedtimeMood === undefined || waketimeMood === undefined || overallDayMood === undefined) {
       console.log(sleepData.sleepDate, sleepData.sleepHour, sleepData.sleepMinute, sleepData.wakeHour,
       sleepData.wakeMinute, sleepData.wakeDate)    
+      setErrorMessage("Please select all fields.");
       setDisplay('visible');
       setTimeout(() => {
         setDisplay('hidden');
       }, 1000)
+    } else if (!/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(sleepData.sleepDate) ||
+                !/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(sleepData.wakeDate)) {
+                  setErrorMessage("Please enter valid dates.");
+                  setDisplay('visible');
+                  setTimeout(() => {
+                    setDisplay('hidden');
+                  }, 1000)
     } else {
       // let dateSleep = sleepDate.split('/');
+      
       let sleepYear = sleepData.sleepDate.split('/').reverse()[0];
       let wakeYear = sleepData.wakeDate.split('/').reverse()[0];
       console.log('YEAR', sleepYear)
@@ -181,11 +191,21 @@ const SleepEntryForm = props => {
         daymood: overallDayMood
       }
 
-      console.log('HERE',newSleepData)
-      if (sleepData.id) {
-        axiosPut(sleepData.id, newSleepData)
+      if (newSleepData.sleepdate[2] > newSleepData.wakedate[2] ||
+            newSleepData.sleepdate[1] > newSleepData.wakedate[1] ||
+            newSleepData.sleepdate[0] > newSleepData.wakedate[0]) {
+        setErrorMessage("You cannot sleep before you wake up!");
+        setDisplay('visible');
+        setTimeout(() => {
+          setDisplay('hidden');
+        }, 1000)
       } else {
-        axiosPost(newSleepData);
+        console.log('HERE',newSleepData)
+        if (sleepData.id) {
+          axiosPut(sleepData.id, newSleepData)
+        } else {
+          axiosPost(newSleepData);
+        }
       }
     }
   }
@@ -282,7 +302,7 @@ const SleepEntryForm = props => {
           </div>
         </div>
 
-        <p style={{color: 'red', visibility: `${display}`}}>Please select all fields.</p>
+        <p style={{color: 'red', visibility: `${display}`}}>{errorMessage}</p>
         <button onClick={handleSubmit} style={{color: 'black', marginTop: '40px', width: '160px', 
                         height:'50px', borderRadius: '8px', fontSize: '18px', 
                         fontWeight: '600', background: '#ACB2D8'}}>{sleepData.id ? "Edit" : "Submit"}</button>

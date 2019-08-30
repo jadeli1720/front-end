@@ -111,6 +111,7 @@ const SignUp = (props) => {
    color: white;
    font-family: 'Bitter', serif;
    font-size:28px;
+   margin: 40px 0 30px;
  `
 
   return (
