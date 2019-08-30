@@ -109,7 +109,7 @@ const SleepEntryCard = ({entry, toHome}) => {
 
         <div className='circle-container'>
           <CircleWrap>
-            <Total>Total hours in bed</Total>
+            <Total>Total hours asleep</Total>
             <div style={{ background: '#F4F4F6', borderRadius: '50%' }}>
               <CircularProgressbar
                 styles={buildStyles({
