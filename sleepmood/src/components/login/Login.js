@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { axiosLoginAuth } from '../../utils/axiosWithAuth'
 import './Login.css';
@@ -35,6 +36,52 @@ function Login(props) {
         })
     }
 
+    const QuoteBlock = styled.div`
+    margin: 15px 40px 10px;
+    padding-top: 40px;
+
+    .quote{
+      color: #edebe3;
+      font-family: 'Bitter', serif;
+      font-size: 24px;
+      line-height: 40px;
+    }
+
+    p{
+      color: #edebe3;
+      font-family: 'Bitter', serif;
+      font-size: 24px;
+    }
+  `;
+
+    const IconContainer = styled.div`
+    color: #979ECD;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    height: 50px;
+    .landing-cloud1 {
+        font-size: 6rem;
+        position: relative;
+        top: -3rem;
+        right: 4rem;
+    }
+    .landing-cloud2 {
+        font-size: 4rem;
+        position: relative;
+        top: -.5rem;
+        right: 9rem;
+    }
+`;
+
+const Header = styled.h2`
+text-align: center;
+color: white;
+font-family: 'Bitter', serif;
+font-size:28px;
+`
+
+
     const Button = styled.button`
     width: 100%;
     background: #d0c9b4;
@@ -42,17 +89,18 @@ function Login(props) {
     border-radius: 5px;
  `
 
-    const FormDiv = styled.div`
-    background: #232432;
-    padding: 10px 0;
- `
-
     return (
-        // <FormDiv className="">
         <div className="login-page">
+            <QuoteBlock>
+                <p className="quote">Good evening, <br></br> welcome back.</p>
+            </QuoteBlock>
+            <IconContainer>
+                <Icon name="cloud" className='landing-cloud1' />
+                <Icon name="cloud" className='landing-cloud2' />
+            </IconContainer>
+            <Header>Sign in to sleepmood</Header>
             <form onSubmit={handleSubmit} className="pure-form pure-form-stacked">
                 <fieldset>
-                    <legend style={{ color: "white" }}>Sign in to sleepmood</legend>
                     <label htmlFor="email">Email</label>
                     <input
                         style={{ marginBottom: "15px" }}
@@ -78,8 +126,7 @@ function Login(props) {
                     </Button>
                 </fieldset>
             </form>
-            <p style={{textAlign: "center", color: "white"}}>First time user? <Link to="/signup">Register.</Link></p>
-        {/* </FormDiv> */}
+            <p style={{ textAlign: "center", color: "white" }}>First time user? <Link to="/signup">Register.</Link></p>
         </div>
     )
 }

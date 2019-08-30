@@ -37,6 +37,7 @@ const WhiteSpace = styled.div`
 
 const SleepEntryForm = props => {
 
+  const valueToEmojiIndex = [0, 0, 1, 2, 3]
   const [bedtimeMood, setBedtimeMood] = useState();
   const [bedtimeMoodColor, setBedtimeMoodColor] = useState(['none', 'none', 'none', 'none']);
 
@@ -110,6 +111,9 @@ const SleepEntryForm = props => {
           wakeMinute: sd.wakedate[4].length === 1 ? `0${sd.wakedate[4]}` : sd.wakedate[4],
           wakeDate: `${sd.wakedate[1]}/${sd.wakedate[2]}/${sd.wakedate[0]}`,
         })
+        applyColor(valueToEmojiIndex[sd.sleepmood], sd.sleepmood, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)
+        applyColor(valueToEmojiIndex[sd.wakemood], sd.wakemood, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)
+        applyColor(valueToEmojiIndex[sd.daymood], sd.daymood, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)
         console.log('success',sd)
       })
       .catch(err => console.log('Oops', err.respond))
@@ -129,9 +133,9 @@ const SleepEntryForm = props => {
       })
   }
 
-  const axiosPut = (newSleepData) => {
+  const axiosPut = (id, newSleepData) => {
     axiosWithAuth()
-      .put(`/sleep/update/${newSleepData.id}`, newSleepData)
+      .put(`/sleep/update/${id}`, newSleepData)
       .then(res => {
         console.log(res.data)
         const arr = makeFinishedDiv("The Sleep Entry\nhas been updated.")
@@ -179,7 +183,7 @@ const SleepEntryForm = props => {
 
       console.log('HERE',newSleepData)
       if (sleepData.id) {
-        axiosPut(newSleepData)
+        axiosPut(sleepData.id, newSleepData)
       } else {
         axiosPost(newSleepData);
       }
@@ -189,7 +193,7 @@ const SleepEntryForm = props => {
   return (
     <div style={{color: '#EFE3E1'}}>
       <h3 style={{margin: '20px 0 0 47px'}}>Good evening, Charlotte.</h3>
-      <h3 style={{margin: '10px 0 20px 47px'}}>It is 22:30 on .....</h3>
+      <h3 style={{margin: '10px 0 20px 47px'}}>{""}</h3>
       
  
       <Card>

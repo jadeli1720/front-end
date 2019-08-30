@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSmile} from '@fortawesome/free-solid-svg-icons';
+import { faSmile } from '@fortawesome/free-solid-svg-icons';
 
 import styled from 'styled-components';
 
@@ -210,7 +210,7 @@ const LandingPage = () => {
                     <p>Your sleep data will be calculated and then graphed allowing you to see variations in you sleep time by night</p>
                 </Card>
                 <Card>
-                    <h5><FontAwesomeIcon icon="smile" /> Mood</h5>
+                    <h5><FontAwesomeIcon style={{color:'#191d37', width: '23.59px', height: '23.59px' }} icon={faSmile} className='lp-margin' /> Mood</h5>
                     <p>Add your mood by using the emoji score system and based on hours slept, we will determine how many hours of sleep you need to feel your very best.</p>
                 </Card>
                 <Card>

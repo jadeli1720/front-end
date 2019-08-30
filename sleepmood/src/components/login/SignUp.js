@@ -98,11 +98,12 @@ const SignUp = (props) => {
 
   const Button = styled.button`
     color: #191d37;
-    background: #f3f3f3;
+    /* background: #f3f3f3; */
     width: 100%;
     background: #b07568;
     color: #231f14;
     border-radius: 5px;
+    font-weight: bold;
  `
 
   const Header = styled.h2`
@@ -174,7 +175,7 @@ const SignUp = (props) => {
               onChange={inputChangeHandler}
             />
           </div>
-          <Button type="submit" className="pure-button pure-button-primary">Sign Up</Button>
+          <Button type="submit" className="pure-button pure-button-primary">Create Account</Button>
         </fieldset>
       </form>
       <p className="login-link">Already have an account? <Link to="/login">Sign In</Link></p>

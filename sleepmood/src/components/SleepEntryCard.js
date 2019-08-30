@@ -24,7 +24,7 @@ const Text = styled.p`
   color: #EFE3E1
 `
 
-const SleepEntryCard = ({entry, toHome, toEditForm}) => {
+const SleepEntryCard = ({entry, toHome}) => {
 // Boom Awesome!!
 
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -124,8 +124,8 @@ const SleepEntryCard = ({entry, toHome, toEditForm}) => {
       </div> {/* bed-and-sleep */}
 
       <div className="button-container">
-        <Link to={`/SleepEntryForm/${entry.id}`} className="card-links">
-          <button type="button" onClick={() => toEditForm(entry)} className="card-edit" >Edit</button>
+        <Link to={`/CreateSleepEntry/update/${entry.id}`} className="card-links">
+          <button type="button" className="card-edit" >Edit</button>
         </Link>
         <Link to={`/CreateSleepEntry/${entry.id}`} className="card-links">
           <button type="button" onClick={toDelete} className="card-delete" >Delete</button>

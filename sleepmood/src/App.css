@@ -16,6 +16,10 @@
   letter-spacing: 1px;
 }
 
+.lp-margin{
+  margin-right:3.5px;
+}
+
 /* HOME COMPONENT */
 .react-calendar {
   width: 350px;
@@ -52,10 +56,6 @@
   stroke: green;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease 0s;
-}
-
-label {
-  color: #efe3e1;
 }
 
 /* SleepEntryCard */
