@@ -96,16 +96,13 @@ const Home = () => {
     console.log('HERE click', date)
   }
   console.log("month Array", monthArray)
-  const arr = monthArray || ["0"];
-  console.log("arr",arr)
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
       <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
       <div>
         <XYPlot height={300} width={470} xType="ordinal">
           <XAxis tickValues={xAxisValues} tickFormat={v =>  
-          { let m = arr[0];
-            arr.shift();
+          { let m = monthArray[0];
             return  `${m.toString()}/ ${v * 1}`}} style={{
             // line: {stroke: '#F5F4EF', width: '4px'},
             // ticks: {stroke: 'blue', strokeWidth: '4px'},
