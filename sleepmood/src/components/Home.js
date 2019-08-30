@@ -5,12 +5,14 @@ import  {
   XAxis,
   YAxis,
   XYPlot } from 'react-vis';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { getRecommendedHoursOfSleep, getGraphData } from './../helpers.js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-svg-icons';
 
 const CircleWrap = styled.div`
   width: 20%; 
@@ -55,7 +57,7 @@ const Home = () => {
   const [averageSleep, setAverageSleep] = useState('');
   const [recommendedSleep, setRecommendedSleep] = useState('');
   const [monthArray, setMonthArray] = useState([]);
-  const [arr, setArr] = useState(monthArray);
+  const emojis = [faSadTear, faMeh, faSmile, faGrinStars];
 
   useEffect(() => {
     
@@ -97,11 +99,13 @@ const Home = () => {
     console.log('HERE click', date)
   }
 
-  // const arr = monthArray;
+  if (graphData.length === 0) {
+    return <p>Loading</p>
+  } else {
 
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
-      <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
+      <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px', marginBottom: '30px'}}>Your sleep history for the week.</h3>
       <div>
         <XYPlot height={300} width={470} xType="ordinal">
           <XAxis tickValues={xAxisValues} tickFormat={v =>  
@@ -151,14 +155,17 @@ const Home = () => {
         <CircleWrap>
           <Text>Average Mood</Text>
           <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
-          <CircularProgressbar 
+          <CircularProgressbarWithChildren 
             styles={buildStyles({
               textSize: '25px',
               textColor: '#191D37',
               pathColor: '#93875C',
               trailColor: '#F4F4F6'
             })}
-            value={averageMood} text={`${averageMood}`} maxValue={4}/>
+            value={averageMood} 
+            maxValue={4}>
+            <FontAwesomeIcon icon={emojis[averageMood - 1]} style={{color: '#AEA37E', width: '35px', height: '35px', margin: '5px'}}/>
+            </CircularProgressbarWithChildren>
           </div>
         </CircleWrap>
         <CircleWrap>
@@ -192,8 +199,8 @@ const Home = () => {
       </RowWrap>
       <div>
         <h2 style={{textAlign: 'center', color: '#D0C9B4', marginTop: '20px', marginBottom: '30px'}}>See additional sleep history by week.</h2>
-        <CalendarWrap style={{borderRadius: '8px', border: '5px solid #B07568', width: '350px', margin: '0 auto'}}>
-          <Calendar 
+        <CalendarWrap style={{pointerEvents: 'none',borderRadius: '8px', border: '5px solid #B07568', width: '350px', margin: '0 auto'}}>
+          <Calendar disabled
             onChange={handleChange}
             value={date}
             selectRange={true}
@@ -205,6 +212,7 @@ const Home = () => {
     </div>
 
   )
+ }
 }
 
 export default Home;
