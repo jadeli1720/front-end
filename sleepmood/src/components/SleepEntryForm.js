@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { makeFinishedDiv, wait } from '../helpers';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-svg-icons';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
@@ -10,7 +11,7 @@ const Card = styled.div`
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  padding-bottom: 20px
+  padding-bottom: 20px;
   z-index: 5;
   position: relative;
   
@@ -34,8 +35,9 @@ const WhiteSpace = styled.div`
   width: 100%
 `
 
-const SleepEntryForm = (props) => {
+const SleepEntryForm = props => {
 
+  const valueToEmojiIndex = [0, 0, 1, 2, 3]
   const [bedtimeMood, setBedtimeMood] = useState();
   const [bedtimeMoodColor, setBedtimeMoodColor] = useState(['none', 'none', 'none', 'none']);
 
@@ -46,6 +48,7 @@ const SleepEntryForm = (props) => {
   const [overallDayMoodColor, setOverallDayMoodColor] = useState(['none', 'none', 'none', 'none']);
 
   const [display, setDisplay] = useState('hidden');
+  const [errorMessage, setErrorMessage] = useState("Please select all fields.");
 
   // const [sleepHour, setSleepHour] = useState();
   // const [sleepMinute, setSleepMinute] = useState();
@@ -56,6 +59,7 @@ const SleepEntryForm = (props) => {
   // const [wakeDate, setWakeDate] = useState();
 
   const [sleepData, setSleepData] = useState({
+    id: undefined,
     sleepHour: undefined,
     sleepMinute: undefined,
     sleepDate: undefined,
@@ -63,6 +67,14 @@ const SleepEntryForm = (props) => {
     wakeMinute: undefined,
     wakeDate: undefined,
   })
+
+  useEffect(() => {
+    const url = props.match.url;  // navigate here
+    const id = props.location.pathname.replace(`${url}/update/`, "")
+    if (id !== "") {
+      return axiosGet(id);
+    }
+  }, [])
 
   const applyColor = (index, value, colorArr, colorSetter, moodSetter) => {
     let newColorArr = colorArr.map((color, i) => {
@@ -86,6 +98,56 @@ const SleepEntryForm = (props) => {
     console.log(e.target.name, ':', e.target.value)
   }
 
+  const axiosGet = (id) => {
+    axiosWithAuth()
+      .get(`/sleep/id/${id}`)
+      .then(res => {
+        const sd = res.data;
+        setSleepData({
+          id: sd.id,
+          sleepHour: sd.sleepdate[3],
+          sleepMinute: sd.sleepdate[4].length === 1 ? `0${sd.sleepdate[4]}` : sd.sleepdate[4],
+          sleepDate: `${sd.sleepdate[1]}/${sd.sleepdate[2]}/${sd.sleepdate[0]}`,
+          wakeHour: sd.wakedate[3],
+          wakeMinute: sd.wakedate[4].length === 1 ? `0${sd.wakedate[4]}` : sd.wakedate[4],
+          wakeDate: `${sd.wakedate[1]}/${sd.wakedate[2]}/${sd.wakedate[0]}`,
+        })
+        applyColor(valueToEmojiIndex[sd.sleepmood], sd.sleepmood, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)
+        applyColor(valueToEmojiIndex[sd.wakemood], sd.wakemood, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)
+        applyColor(valueToEmojiIndex[sd.daymood], sd.daymood, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)
+        console.log('success',sd)
+      })
+      .catch(err => console.log('Oops', err.respond))
+  }
+
+  const axiosPost = (newSleepData) => {
+    axiosWithAuth()
+      .post("/sleep/new", newSleepData)
+      .then(res => {
+        console.log(res.data)
+        const arr = makeFinishedDiv("The Sleep Entry\nhas been added.")
+        wait(2).then(() => arr[1].remove())
+        wait(1.5).then(() => props.history.push("/home"))
+      })
+      .catch(err => {
+        console.log('HERE Opps, Something happened!', err)
+      })
+  }
+
+  const axiosPut = (id, newSleepData) => {
+    axiosWithAuth()
+      .put(`/sleep/update/${id}`, newSleepData)
+      .then(res => {
+        console.log(res.data)
+        const arr = makeFinishedDiv("The Sleep Entry\nhas been updated.")
+        wait(2).then(() => arr[1].remove())
+        wait(1.5).then(() => props.history.push("/home"))
+      })
+      .catch(err => {
+        console.log('HERE Oops, Something happened!', err)
+      })
+  }
+
   const handleSubmit = () => {
     console.log(bedtimeMood, waketimeMood, overallDayMood)
     // const newSleepData = {
@@ -101,12 +163,21 @@ const SleepEntryForm = (props) => {
         || bedtimeMood === undefined || waketimeMood === undefined || overallDayMood === undefined) {
       console.log(sleepData.sleepDate, sleepData.sleepHour, sleepData.sleepMinute, sleepData.wakeHour,
       sleepData.wakeMinute, sleepData.wakeDate)    
+      setErrorMessage("Please select all fields.");
       setDisplay('visible');
       setTimeout(() => {
         setDisplay('hidden');
       }, 1000)
+    } else if (!/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(sleepData.sleepDate) ||
+                !/^(0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])[\/\-]\d{4}$/.test(sleepData.wakeDate)) {
+                  setErrorMessage("Please enter valid dates.");
+                  setDisplay('visible');
+                  setTimeout(() => {
+                    setDisplay('hidden');
+                  }, 1000)
     } else {
       // let dateSleep = sleepDate.split('/');
+      
       let sleepYear = sleepData.sleepDate.split('/').reverse()[0];
       let wakeYear = sleepData.wakeDate.split('/').reverse()[0];
       console.log('YEAR', sleepYear)
@@ -119,25 +190,30 @@ const SleepEntryForm = (props) => {
         wakemood: waketimeMood,
         daymood: overallDayMood
       }
+      if (newSleepData.sleepdate[2] > newSleepData.wakedate[2] ||
+            newSleepData.sleepdate[1] > newSleepData.wakedate[1] ||
+            newSleepData.sleepdate[0] > newSleepData.wakedate[0]) {
+        setErrorMessage("You cannot sleep before you wake up!");
+        setDisplay('visible');
+        setTimeout(() => {
+          setDisplay('hidden');
+        }, 1000)
+      } else {
+        console.log('HERE',newSleepData)
+        if (sleepData.id) {
+          axiosPut(sleepData.id, newSleepData)
+        } else {
+          axiosPost(newSleepData);
+        }
+      }
 
-      console.log('HERE',newSleepData)
-      axiosWithAuth()
-      .post("/sleep/new", newSleepData)
-      .then(res => {
-        let data = res.data;
-        console.log(data)  
-        props.history.push('/home');
-      })
-      .catch(err => {
-        console.log('HERE Opps, Something happened!', err)
-      }) 
     }
   }
 
   return (
     <div style={{color: '#EFE3E1'}}>
       <h3 style={{margin: '20px 0 0 47px'}}>Good evening, Charlotte.</h3>
-      <h3 style={{margin: '10px 0 20px 47px'}}>It is 22:30 on .....</h3>
+      <h3 style={{margin: '10px 0 20px 47px'}}>{""}</h3>
       
  
       <Card>
@@ -226,10 +302,10 @@ const SleepEntryForm = (props) => {
           </div>
         </div>
 
-        <p style={{color: 'red', visibility: `${display}`}}>Please select all fields.</p>
+        <p style={{color: 'red', visibility: `${display}`}}>{errorMessage}</p>
         <button onClick={handleSubmit} style={{color: 'black', marginTop: '40px', width: '160px', 
                         height:'50px', borderRadius: '8px', fontSize: '18px', 
-                        fontWeight: '600', background: '#ACB2D8'}}>Submit</button>
+                        fontWeight: '600', background: '#ACB2D8'}}>{sleepData.id ? "Edit" : "Submit"}</button>
 
       </Card>
 

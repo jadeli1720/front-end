@@ -20,6 +20,10 @@ const SleepEntryList = (props) => {
       .catch(err => console.log('Oops', err.respond))
   }
 
+  const toHome = () => {
+    props.history.push("/home")
+  }
+
   useEffect(() => {
     const url = props.match.url;  // navigate here
     const id = props.location.pathname.replace(`${url}/`, "")
@@ -39,7 +43,7 @@ const SleepEntryList = (props) => {
   
   return (
     <div className="card-container">
-      <SleepEntryCard entry={sleepentry} />
+      <SleepEntryCard entry={sleepentry} toHome={toHome} />
     </div>
   )
 };
