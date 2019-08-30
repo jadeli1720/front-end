@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../node_modules/react-vis/dist/style.css';
 import  { HorizontalGridLines,
+  VerticalBarSeries,
   XAxis,
   YAxis,
   XYPlot, LineSeries } from 'react-vis';
@@ -53,6 +54,7 @@ const Home = () => {
   const [averageMood, setAverageMood] = useState('');
   const [averageSleep, setAverageSleep] = useState('');
   const [recommendedSleep, setRecommendedSleep] = useState('');
+  const [monthArray, setMonthArray] = useState([]);
 
   useEffect(() => {
     
@@ -73,7 +75,9 @@ const Home = () => {
       })
       setXAxisValues(xAxis);
 
-      let graphData = getGraphData(week, setStartDate, setEndDate, setLongestSleep, setShortestSleep, setAverageSleep, setAverageMood);
+      let graphData = getGraphData(week, setStartDate, setEndDate, 
+                                   setLongestSleep, setShortestSleep, 
+                                   setAverageSleep, setAverageMood, setMonthArray);
       setGraphData(graphData);
 
     })
@@ -91,13 +95,16 @@ const Home = () => {
   const handleCalendarDateClick = () => {
     console.log('HERE click', date)
   }
-
+  const arr = monthArray;
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
       <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
       <div>
-        <XYPlot height={300} width={470}>
-          <XAxis tickValues={xAxisValues} tickFormat={v =>  v * 1} style={{
+        <XYPlot height={300} width={470} xType="ordinal">
+          <XAxis tickValues={xAxisValues} tickFormat={v =>  
+          { let m = arr[0];
+            arr.shift();
+            return  `${m.toString()}/ ${v * 1}`}} style={{
             // line: {stroke: '#F5F4EF', width: '4px'},
             // ticks: {stroke: 'blue', strokeWidth: '4px'},
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
@@ -108,7 +115,7 @@ const Home = () => {
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
           <HorizontalGridLines style={{backgroundColor: 'blue'}}/>
-          <LineSeries data={graphData} style={{stroke: '#4A549C', strokeWidth: 8}}/>
+          <VerticalBarSeries data={graphData} style={{fill: '#4A549C', stroke: '#93875C', strokeWidth: 2}}/>
         </XYPlot>
       </div>
       <p style={{color: 'white', textAlign: 'center'}}>Week of {startDate} - {endDate}</p>

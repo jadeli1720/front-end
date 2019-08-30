@@ -34,13 +34,15 @@ export const getRecommendedHoursOfSleep = (data) => {
   return max[1]
 }
 
-export const getGraphData = (data, setStartDate, setEndDate, setLongestSleep, setShortestSleep, setAverageSleep, setAverageMood) => {
+export const getGraphData = (data, setStartDate, setEndDate, 
+                             setLongestSleep, setShortestSleep, 
+                             setAverageSleep, setAverageMood, setMonthArray) => {
 
   let hoursArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   let obj = {};
   let userHours = [];
   let moods = [];
-
+  let monthArr = [];
 
   let graphData = data.map((item, index) => {
 
@@ -53,6 +55,8 @@ export const getGraphData = (data, setStartDate, setEndDate, setLongestSleep, se
     let year2 = [item.wakedate[0]].toString();
     let time2 = [item.wakedate[3], item.wakedate[4]].join(':');
     let finish = new Date(md2 + ', ' + year2 + ' ' + time2);
+
+    monthArr.push(finish.getMonth() + 1);
 
     if (index === 0) {
       setStartDate((finish.getMonth() + 1) + '/' + finish.getDate());
@@ -72,12 +76,14 @@ export const getGraphData = (data, setStartDate, setEndDate, setLongestSleep, se
     } 
     return {x: item.wakedate[2], y: hours}
   })
+  //collect months to display on xAxis before the date
+  setMonthArray(monthArr);
 
-  hoursArr.forEach(num => {
-    if (!obj[num]) {
-      graphData.push({y: num})
-    }
-  })
+  // hoursArr.forEach(num => {
+  //   if (!obj[num]) {
+  //     graphData.push({y: num})
+  //   }
+  // })
 
   let sortedUserHours = userHours.sort((a, b) => a - b);
   let avrSleep = Math.round(userHours.reduce((acc, val) => {return acc += val}, 0) / userHours.length);
