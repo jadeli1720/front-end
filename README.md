@@ -18,7 +18,7 @@ The following libraries/programs were used fo this webpage application:
 
 * Visual Studio Code
 * React, including:
-    * Reac-dom
+    * React-dom
     * React-router-dom
     * React-calendar
     * React-big-calendar
