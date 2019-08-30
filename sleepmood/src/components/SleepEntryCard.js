@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import { makeDateFromArray, getHours, makeFinishedDiv, wait } from '../helpers';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-svg-icons';
@@ -63,7 +63,7 @@ const SleepEntryCard = ({entry, toHome}) => {
   }
 
   const emojis = [faSadTear, faMeh, faSmile, faGrinStars];
-  const averageMood = Math.round(entry.sleepmood + entry.wakemood + entry.daymood) / 3;
+  const averageMood = Math.round((entry.sleepmood + entry.wakemood + entry.daymood) / 3);
 
 
   
@@ -82,7 +82,7 @@ const SleepEntryCard = ({entry, toHome}) => {
 
   return (
     <div className="SleepEntryCard">
-      <h1 class="card-title">{sleep.month} {sleep.day}, {sleep.year} - {wake.month} {wake.day}, {wake.year}</h1>
+      <h1 className="card-title">{sleep.month} {sleep.day}, {sleep.year} - {wake.month} {wake.day}, {wake.year}</h1>
       <div className="bed-and-sleep">
         <div className="top-container" >
           <div className="titles">
@@ -125,15 +125,17 @@ const SleepEntryCard = ({entry, toHome}) => {
           <CircleWrap>
             <Average>Average Mood</Average>
             <div style={{ background: '#F4F4F6', borderRadius: '50%' }}>
-              <CircularProgressbar
+              <CircularProgressbarWithChildren 
                 styles={buildStyles({
                   textSize: '25px',
                   textColor: '#191D37',
                   pathColor: '#93875C',
                   trailColor: '#F4F4F6'
                 })}
-                value={averageMood} text={averageMood} maxValue={4}
-              />
+                value={averageMood} 
+                maxValue={4}>
+                <FontAwesomeIcon icon={emojis[averageMood - 1]} style={{color: '#AEA37E', width: '35px', height: '35px', margin: '5px'}}/>
+              </CircularProgressbarWithChildren>
             </div>
           </CircleWrap>
 

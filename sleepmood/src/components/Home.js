@@ -5,12 +5,14 @@ import  {
   XAxis,
   YAxis,
   XYPlot } from 'react-vis';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles, CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { getRecommendedHoursOfSleep, getGraphData } from './../helpers.js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGrinStars, faSmile, faMeh, faSadTear } from '@fortawesome/free-solid-svg-icons';
 
 const CircleWrap = styled.div`
   width: 20%; 
@@ -55,6 +57,7 @@ const Home = () => {
   const [averageSleep, setAverageSleep] = useState('');
   const [recommendedSleep, setRecommendedSleep] = useState('');
   const [monthArray, setMonthArray] = useState([]);
+  const emojis = [faSadTear, faMeh, faSmile, faGrinStars];
 
   useEffect(() => {
     
@@ -68,7 +71,6 @@ const Home = () => {
       setRecommendedSleep(recommendedHours);
 
       let week = data.slice(data.length - 7);
-      console.log('useeffect week', week)
 
       let xAxis = week.map(item => {
         return item.wakedate[2];
@@ -87,29 +89,28 @@ const Home = () => {
   }, [])
 
   const handleChange = (date) => {
-    console.log([date, new Date('August 13, 2019')])
-
     setDate(date);
   }
 
-  const handleCalendarDateClick = () => {
-    console.log('HERE click', date)
-  }
+
+  if (graphData.length === 0) {
+    return <p>Loading</p>
+  } else {
 
   return (
     <div style={{margin: '10px', display: 'flex', flexDirection: 'column'}}>
-      <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px'}}>Your sleep history for the week.</h3>
+      <h3 style={{marginLeft: '30px', color: '#D0C9B4', marginTop: '20px', marginBottom: '30px'}}>Your sleep history for the week.</h3>
       <div>
         <XYPlot height={300} width={470} xType="ordinal">
           <XAxis tickValues={xAxisValues} tickFormat={v =>  
           { let m = monthArray[0];
-            return  `${m.toString()}/ ${v * 1}`}} style={{
+            monthArray.shift();
+            return  `${m.toString()} / ${v * 1}`}} style={{
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
           <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} tickTotal={12} style={{
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
-          {/* <HorizontalGridLines style={{backgroundColor: 'blue'}}/> */}
           <VerticalBarSeries data={graphData} style={{fill: '#4A549C', stroke: '#93875C', strokeWidth: 2}} opacity={0.8}/>
         </XYPlot>
       </div>
@@ -147,14 +148,17 @@ const Home = () => {
         <CircleWrap>
           <Text>Average Mood</Text>
           <div style={{background: '#F4F4F6', borderRadius: '50%'}}>
-          <CircularProgressbar 
+          <CircularProgressbarWithChildren 
             styles={buildStyles({
               textSize: '25px',
               textColor: '#191D37',
               pathColor: '#93875C',
               trailColor: '#F4F4F6'
             })}
-            value={averageMood} text={`${averageMood}`} maxValue={4}/>
+            value={averageMood} 
+            maxValue={4}>
+            <FontAwesomeIcon icon={emojis[averageMood - 1]} style={{color: '#AEA37E', width: '35px', height: '35px', margin: '5px'}}/>
+            </CircularProgressbarWithChildren>
           </div>
         </CircleWrap>
         <CircleWrap>
@@ -188,11 +192,10 @@ const Home = () => {
       </RowWrap>
       <div>
         <h2 style={{textAlign: 'center', color: '#D0C9B4', marginTop: '20px', marginBottom: '30px'}}>See additional sleep history by week.</h2>
-        <CalendarWrap style={{borderRadius: '8px', border: '5px solid #B07568', width: '350px', margin: '0 auto'}}>
-          <Calendar 
+        <CalendarWrap style={{pointerEvents: 'none',borderRadius: '8px', border: '5px solid #B07568', width: '350px', margin: '0 auto'}}>
+          <Calendar disabled
             onChange={handleChange}
             value={date}
-            selectRange={true}
           />
         </CalendarWrap>
         <WhiteSpace></WhiteSpace>
@@ -200,6 +203,7 @@ const Home = () => {
     </div>
 
   )
+ }
 }
 
 export default Home;

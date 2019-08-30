@@ -103,7 +103,7 @@ const NavBar = () => {
               <Dropdown.Item as={NavLink} to='/SleepHistory'>Sleep History</Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/CreateSleepEntry'>Create Sleep Entry</Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/Help'>Help</Dropdown.Item>
-              <Dropdown.Item as={Link} onClick={toMarketing}>Sleepmood</Dropdown.Item>
+              <Dropdown.Item onClick={toMarketing}>Sleepmood</Dropdown.Item>
               <Dropdown.Item as={NavLink} to='/' onClick={toSignOut}>Sign out</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

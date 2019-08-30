@@ -50,22 +50,14 @@ const SleepEntryForm = props => {
   const [display, setDisplay] = useState('hidden');
   const [errorMessage, setErrorMessage] = useState("Please select all fields.");
 
-  // const [sleepHour, setSleepHour] = useState();
-  // const [sleepMinute, setSleepMinute] = useState();
-  // const [sleepDate, setSleepDate] = useState();
-
-  // const [wakeHour, setWakeHour] = useState();
-  // const [wakeMinute, setWakeMinute] = useState();
-  // const [wakeDate, setWakeDate] = useState();
-
   const [sleepData, setSleepData] = useState({
-    id: undefined,
-    sleepHour: undefined,
-    sleepMinute: undefined,
-    sleepDate: undefined,
-    wakeHour: undefined,
-    wakeMinute: undefined,
-    wakeDate: undefined,
+    id: '',
+    sleepHour: '',
+    sleepMinute: '',
+    sleepDate: '',
+    wakeHour: '',
+    wakeMinute: '',
+    wakeDate: '',
   })
 
   useEffect(() => {
@@ -84,10 +76,8 @@ const SleepEntryForm = props => {
         return color = '#EFE3E1'
       }
     })
-    console.log('newarr', newColorArr)
     colorSetter(newColorArr);
     moodSetter(value);
-    console.log('moodsetter', bedtimeMood)
   }
 
   const handleChange = (e) => {
@@ -95,7 +85,6 @@ const SleepEntryForm = props => {
       ...sleepData,
       [e.target.name]: e.target.value
     });
-    console.log(e.target.name, ':', e.target.value)
   }
 
   const axiosGet = (id) => {
@@ -115,7 +104,6 @@ const SleepEntryForm = props => {
         applyColor(valueToEmojiIndex[sd.sleepmood], sd.sleepmood, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)
         applyColor(valueToEmojiIndex[sd.wakemood], sd.wakemood, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)
         applyColor(valueToEmojiIndex[sd.daymood], sd.daymood, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)
-        console.log('success',sd)
       })
       .catch(err => console.log('Oops', err.respond))
   }
@@ -149,20 +137,12 @@ const SleepEntryForm = props => {
   }
 
   const handleSubmit = () => {
-    console.log(bedtimeMood, waketimeMood, overallDayMood)
-    // const newSleepData = {
-    //   sleepdate: [],
-    //   wakedate: [],
-    //   sleepmood: '',
-    //   wakemood: '',
-    //   daymood: ''
-    // }
-    if (sleepData.sleepDate === undefined || sleepData.sleepHour === undefined || 
-        sleepData.sleepMinute === undefined || sleepData.wakeHour === undefined || 
-        sleepData.wakeMinute === undefined || sleepData.wakeDate === undefined
-        || bedtimeMood === undefined || waketimeMood === undefined || overallDayMood === undefined) {
-      console.log(sleepData.sleepDate, sleepData.sleepHour, sleepData.sleepMinute, sleepData.wakeHour,
-      sleepData.wakeMinute, sleepData.wakeDate)    
+
+    if (sleepData.sleepDate === "" || sleepData.sleepHour === "" || 
+        sleepData.sleepMinute === "" || sleepData.wakeHour === "" || 
+        sleepData.wakeMinute === "" || sleepData.wakeDate === ""
+        || bedtimeMood === "" || waketimeMood === "" || overallDayMood === "") {
+    
       setErrorMessage("Please select all fields.");
       setDisplay('visible');
       setTimeout(() => {
@@ -176,11 +156,9 @@ const SleepEntryForm = props => {
                     setDisplay('hidden');
                   }, 1000)
     } else {
-      // let dateSleep = sleepDate.split('/');
       
       let sleepYear = sleepData.sleepDate.split('/').reverse()[0];
       let wakeYear = sleepData.wakeDate.split('/').reverse()[0];
-      console.log('YEAR', sleepYear)
       const newSleepData = {
         sleepdate: [parseInt(sleepYear), parseInt(sleepData.sleepDate.split('/')[0]), parseInt(sleepData.sleepDate.split('/')[1]),
                     parseInt(sleepData.sleepHour), parseInt(sleepData.sleepMinute)],
@@ -199,7 +177,6 @@ const SleepEntryForm = props => {
           setDisplay('hidden');
         }, 1000)
       } else {
-        console.log('HERE',newSleepData)
         if (sleepData.id) {
           axiosPut(sleepData.id, newSleepData)
         } else {
@@ -225,16 +202,20 @@ const SleepEntryForm = props => {
           <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
         
           <input name="sleepHour" 
-                  style={{width: '50px'}} 
+                  style={{width: '60px', margin: '5px', height: '35px', 
+                          borderRadius: '8px', background: 'transparent', 
+                          outline: 'none', color: 'white', fontSize: '16px', textAlign: 'center'}} 
                   type="text"
-                  value={sleepData.sleepHour} 
+                  value={sleepData.sleepHour || ''} 
                   placeholder="00"
                   onChange={handleChange}
           />
           <input name="sleepMinute" 
-                  style={{width: '50px'}} 
+                  style={{width: '60px',  margin: '5px', height: '35px', borderRadius: '8px',
+                  background: 'transparent', textAlign: 'center',
+                  outline: 'none', color: 'white', fontSize: '16px'}} 
                   type="text"
-                  value={sleepData.sleepMinute} 
+                  value={sleepData.sleepMinute || ''} 
                   placeholder="00"
                   onChange={handleChange}
           />
@@ -242,10 +223,12 @@ const SleepEntryForm = props => {
           </div>
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <input placeholder="MM/DD/YYYY" 
-                   style={{width: '100px', marginBottom: '15px'}}
+                   style={{width: '120px', marginBottom: '15px', height: '35px',
+                   borderRadius: '8px', background: 'transparent', textAlign: 'center',
+                   outline: 'none', color: 'white', fontSize: '16px'}}
                    name="sleepDate"
                    type="text"
-                   value={sleepData.sleepDate}
+                   value={sleepData.sleepDate || ''}
                    onChange={handleChange}
             />
           </div>
@@ -261,26 +244,32 @@ const SleepEntryForm = props => {
           <h3>2. Select Waketime & Mood</h3>
           <div style={{display: 'flex', justifyContent: 'center', paddingBottom: '15px'}}>
             <input name="wakeHour" 
-                   style={{width: '50px'}} 
+                   style={{width: '60px',  margin: '5px', height: '35px', borderRadius: '8px',
+                   background: 'transparent', textAlign: 'center',
+                   outline: 'none', color: 'white', fontSize: '16px'}} 
                    type="text"
-                   value={sleepData.wakeHour} 
+                   value={sleepData.wakeHour || ''} 
                    placeholder="00"
                    onChange={handleChange}
             />
             <input name="wakeMinute" 
-                   style={{width: '50px'}} 
+                   style={{width: '60px',  margin: '5px', height: '35px', borderRadius: '8px',
+                   background: 'transparent', textAlign: 'center',
+                   outline: 'none', color: 'white', fontSize: '16px'}} 
                    type="text"
-                   value={sleepData.wakeMinute} 
+                   value={sleepData.wakeMinute || ''} 
                    placeholder="00"
                    onChange={handleChange}
             />
           </div>
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <input placeholder="MM/DD/YYYY" 
-                   style={{width: '100px', marginBottom: '15px'}}
+                   style={{width: '120px', marginBottom: '15px', height: '35px',
+                   borderRadius: '8px', background: 'transparent', textAlign: 'center',
+                   outline: 'none', color: 'white', fontSize: '16px'}}
                    name="wakeDate"
                    type="text"
-                   value={sleepData.wakeDate}
+                   value={sleepData.wakeDate || ''}
                    onChange={handleChange}
             />
           </div>
