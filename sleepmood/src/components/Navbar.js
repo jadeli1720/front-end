@@ -40,6 +40,7 @@ const NavBar = () => {
         left: -3rem;
         z-index: 3;
         color: white;
+        font-family: 'Bitter', serif;
 
       }
     }

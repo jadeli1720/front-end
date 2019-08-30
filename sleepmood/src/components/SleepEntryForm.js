@@ -190,7 +190,6 @@ const SleepEntryForm = props => {
         wakemood: waketimeMood,
         daymood: overallDayMood
       }
-
       if (newSleepData.sleepdate[2] > newSleepData.wakedate[2] ||
             newSleepData.sleepdate[1] > newSleepData.wakedate[1] ||
             newSleepData.sleepdate[0] > newSleepData.wakedate[0]) {
@@ -207,6 +206,7 @@ const SleepEntryForm = props => {
           axiosPost(newSleepData);
         }
       }
+
     }
   }
 
