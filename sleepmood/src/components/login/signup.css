@@ -3,6 +3,8 @@ form {
     justify-content: center;
     font-size: 1.2rem;
     background: #232432;
+    margin: 30px 40px;
+    padding: 20px;
 }
 
 a {
@@ -23,5 +25,10 @@ input {
     background: #232432;
     color: white;
     padding: 10px 0;
+}
+
+.login-link{
+    color:white;
+    text-align: center;
 }
 

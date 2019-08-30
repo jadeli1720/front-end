@@ -111,3 +111,61 @@ export const makeDateFromArray = (arr) => {
   newArr[1]--;
   return new Date(...newArr);
 }
+
+export const makeFinishedDiv = (str) => {
+  /*
+    Here I'm creating three elements:
+    A div to make the page darker/kinda "greyed out"
+    A div to hold the text body
+    The actual text
+    I'm appending it to the body, then returning the three elements as an array.
+
+    WHENEVER you use this function, make sure to remove the three elements from the body:
+        array.forEach(elem => body.remove(elem))    
+  */
+
+  // Finding the body
+  const body = document.querySelector("div.App");
+  // body.style.overflow = "hidden";
+  
+  // Creating the divCover
+  const divCover = document.createElement("div")
+  divCover.style.position = "fixed";
+  divCover.style.marginTop = `-30px`;
+  divCover.style.height = "100vh";
+  divCover.style.width = "100vw";
+  divCover.style.background = "rgba(0, 0, 0, 0.6)";
+  divCover.style.overflow = "hidden";
+  divCover.style.zIndex = "9";
+
+  // Creating the div and h3 for the text box
+  const eish = document.createElement("h2")
+  eish.innerText = str
+  eish.style.color = "white";
+
+  const divCheck = document.createElement("div");
+  divCheck.append(eish);
+  divCheck.style.background = "#191D37";
+  divCheck.style.borderRadius = "5px"
+  divCheck.style.padding = "1rem";
+  divCheck.style.position = "fixed";
+  divCheck.style.top = "50%";
+  divCheck.style.zIndex = "10";
+  divCheck.style.left = "50%";
+  body.prepend(divCover);
+  divCover.prepend(divCheck);
+  divCheck.style.marginTop = `-${divCheck.offsetHeight/2}px`;
+  divCheck.style.marginLeft = `-${divCheck.offsetWidth/2}px`;
+
+  return [body, divCover]
+}
+
+export const wait = s => {
+  return new Promise(res => {
+    setTimeout(() => {
+      console.log("next thing!");
+      res();
+    }, s*1000)
+  })
+}
+
