@@ -50,14 +50,6 @@ const SleepEntryForm = props => {
   const [display, setDisplay] = useState('hidden');
   const [errorMessage, setErrorMessage] = useState("Please select all fields.");
 
-  // const [sleepHour, setSleepHour] = useState();
-  // const [sleepMinute, setSleepMinute] = useState();
-  // const [sleepDate, setSleepDate] = useState();
-
-  // const [wakeHour, setWakeHour] = useState();
-  // const [wakeMinute, setWakeMinute] = useState();
-  // const [wakeDate, setWakeDate] = useState();
-
   const [sleepData, setSleepData] = useState({
     id: '',
     sleepHour: '',
@@ -84,10 +76,8 @@ const SleepEntryForm = props => {
         return color = '#EFE3E1'
       }
     })
-    console.log('newarr', newColorArr)
     colorSetter(newColorArr);
     moodSetter(value);
-    console.log('moodsetter', bedtimeMood)
   }
 
   const handleChange = (e) => {
@@ -95,7 +85,6 @@ const SleepEntryForm = props => {
       ...sleepData,
       [e.target.name]: e.target.value
     });
-    console.log(e.target.name, ':', e.target.value)
   }
 
   const axiosGet = (id) => {
@@ -115,7 +104,6 @@ const SleepEntryForm = props => {
         applyColor(valueToEmojiIndex[sd.sleepmood], sd.sleepmood, bedtimeMoodColor, setBedtimeMoodColor, setBedtimeMood)
         applyColor(valueToEmojiIndex[sd.wakemood], sd.wakemood, waketimeMoodColor, setWaketimeMoodColor, setWaketimeMood)
         applyColor(valueToEmojiIndex[sd.daymood], sd.daymood, overallDayMoodColor, setOverallDayMoodColor, setOverallDayMood)
-        console.log('success',sd)
       })
       .catch(err => console.log('Oops', err.respond))
   }
@@ -149,20 +137,12 @@ const SleepEntryForm = props => {
   }
 
   const handleSubmit = () => {
-    console.log(bedtimeMood, waketimeMood, overallDayMood)
-    // const newSleepData = {
-    //   sleepdate: [],
-    //   wakedate: [],
-    //   sleepmood: '',
-    //   wakemood: '',
-    //   daymood: ''
-    // }
+
     if (sleepData.sleepDate === "" || sleepData.sleepHour === "" || 
         sleepData.sleepMinute === "" || sleepData.wakeHour === "" || 
         sleepData.wakeMinute === "" || sleepData.wakeDate === ""
         || bedtimeMood === "" || waketimeMood === "" || overallDayMood === "") {
-      console.log(sleepData.sleepDate, sleepData.sleepHour, sleepData.sleepMinute, sleepData.wakeHour,
-      sleepData.wakeMinute, sleepData.wakeDate)    
+    
       setErrorMessage("Please select all fields.");
       setDisplay('visible');
       setTimeout(() => {
@@ -176,11 +156,9 @@ const SleepEntryForm = props => {
                     setDisplay('hidden');
                   }, 1000)
     } else {
-      // let dateSleep = sleepDate.split('/');
       
       let sleepYear = sleepData.sleepDate.split('/').reverse()[0];
       let wakeYear = sleepData.wakeDate.split('/').reverse()[0];
-      console.log('YEAR', sleepYear)
       const newSleepData = {
         sleepdate: [parseInt(sleepYear), parseInt(sleepData.sleepDate.split('/')[0]), parseInt(sleepData.sleepDate.split('/')[1]),
                     parseInt(sleepData.sleepHour), parseInt(sleepData.sleepMinute)],
@@ -199,7 +177,6 @@ const SleepEntryForm = props => {
           setDisplay('hidden');
         }, 1000)
       } else {
-        console.log('HERE',newSleepData)
         if (sleepData.id) {
           axiosPut(sleepData.id, newSleepData)
         } else {

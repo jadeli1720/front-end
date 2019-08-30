@@ -71,7 +71,6 @@ const Home = () => {
       setRecommendedSleep(recommendedHours);
 
       let week = data.slice(data.length - 7);
-      console.log('useeffect week', week)
 
       let xAxis = week.map(item => {
         return item.wakedate[2];
@@ -90,14 +89,9 @@ const Home = () => {
   }, [])
 
   const handleChange = (date) => {
-    console.log([date, new Date('August 13, 2019')])
-
     setDate(date);
   }
 
-  const handleCalendarDateClick = () => {
-    console.log('HERE click', date)
-  }
 
   if (graphData.length === 0) {
     return <p>Loading</p>
@@ -117,7 +111,6 @@ const Home = () => {
           <YAxis tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} tickTotal={12} style={{
             text: {stroke: 'none', fill: '#F5F4EF', fontWeight: 600}
           }}/>
-          {/* <HorizontalGridLines style={{backgroundColor: 'blue'}}/> */}
           <VerticalBarSeries data={graphData} style={{fill: '#4A549C', stroke: '#93875C', strokeWidth: 2}} opacity={0.8}/>
         </XYPlot>
       </div>
@@ -203,8 +196,6 @@ const Home = () => {
           <Calendar disabled
             onChange={handleChange}
             value={date}
-            selectRange={true}
-            onClickDay={(e) => e.preventDefault()}
           />
         </CalendarWrap>
         <WhiteSpace></WhiteSpace>
