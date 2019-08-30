@@ -85,13 +85,13 @@ const SignUp = (props) => {
     .landing-cloud1 {
         font-size: 6rem;
         position: relative;
-        top: -3rem;
+        top: -4rem;
         right: 4rem;
     }
     .landing-cloud2 {
         font-size: 4rem;
         position: relative;
-        top: -.5rem;
+        top: -1rem;
         right: 9rem;
     }
 `;
